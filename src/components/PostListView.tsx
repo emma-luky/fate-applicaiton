@@ -21,6 +21,7 @@ export function PostListView() {
     };
     void getPosts();
   }, []);
+  
   return (
     <YStack gap={10} margin={10}>
       {posts.map((post) => (

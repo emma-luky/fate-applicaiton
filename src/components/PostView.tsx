@@ -1,8 +1,7 @@
 import { Alert } from 'react-native';
-import { Heart, MessageSquare } from '@tamagui/lucide-icons';
-import { router } from 'expo-router';
+import { Bookmark, Heart } from '@tamagui/lucide-icons';
 import { QueryDocumentSnapshot } from 'firebase/firestore/lite';
-import { Button, Image, Paragraph, XStack, YStack } from 'tamagui';
+import { Button, Paragraph, SizableText, XStack, YStack } from 'tamagui';
 
 type Props = {
   post: QueryDocumentSnapshot;
@@ -13,11 +12,7 @@ export function PostView(props: Props) {
 
   return (
     <YStack gap={10}>
-      <Image
-        width="100%"
-        aspectRatio={1}
-        source={{ uri: post.data().imageUrl }}
-      />
+      <SizableText>Text</SizableText>
       <XStack gap={20}>
         <Button
           p={0}
@@ -28,14 +23,15 @@ export function PostView(props: Props) {
         >
           <Heart />
         </Button>
+
         <Button
           p={0}
           chromeless
           onPress={() => {
-            router.navigate('/new-comment');
+            Alert.alert('saved');
           }}
         >
-          <MessageSquare />
+          <Bookmark />
         </Button>
       </XStack>
       <Paragraph key={post.id}>{post.data().caption}</Paragraph>

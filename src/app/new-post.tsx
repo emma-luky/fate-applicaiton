@@ -1,14 +1,15 @@
 import { Stack } from 'expo-router';
-import { Paragraph, YStack } from 'tamagui';
+import { YStack } from 'tamagui';
+import { NewMessage } from '../components/NewMessage';
 
-export default function NewCommentForm() {
+export default function NewPostForm() {
   return (
     <>
       <Stack.Screen
         options={{ title: 'New Comment', headerBackTitleVisible: false }}
       />
       <YStack flex={1} backgroundColor="white" p={20}>
-        <Paragraph>Comment Form will go here.</Paragraph>
+        <NewMessage></NewMessage>
       </YStack>
     </>
   );
