@@ -18,16 +18,6 @@ export function PostView(props: Props) {
           p={0}
           chromeless
           onPress={() => {
-            Alert.alert('liked');
-          }}
-        >
-          <Heart />
-        </Button>
-
-        <Button
-          p={0}
-          chromeless
-          onPress={() => {
             Alert.alert('saved');
           }}
         >
