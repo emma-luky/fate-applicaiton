@@ -6,7 +6,7 @@ import { NewUserForm } from '../components/NewUserForm';
 export default function App() {
   return (
     <>
-      <Stack.Screen options={{ title: 'Home' }} />
+      <Stack.Screen options={{ title: 'Login' }} />
       <ScrollView flex={1}>
         <NewUserForm></NewUserForm>
       </ScrollView>

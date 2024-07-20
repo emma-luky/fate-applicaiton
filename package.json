@@ -6,6 +6,7 @@
     "start": "expo start",
     "db:reset": "tsx src/scripts/reset.ts",
     "db:seed": "tsx src/scripts/seed.ts",
+    "db:fake_database": "tsx src/scripts/fake_database.ts",
     "clean": "rm -rf .expo dist tsconfig.tsbuildinfo",
     "typecheck": "tsc --noEmit",
     "lint": "eslint --max-warnings 0 .",

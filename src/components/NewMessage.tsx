@@ -22,7 +22,7 @@ export function NewMessage() {
 }
 function InputDemo(props: { size: SizeTokens }) {
   return (
-    <XStack alignItems="center" space="$2">
+    <XStack alignItems="center">
       <Input flex={1} size={props.size} placeholder={`Size ${props.size}...`} />
       <Button size={props.size}>Go</Button>
     </XStack>
