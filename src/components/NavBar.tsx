@@ -19,8 +19,7 @@ export function NavBar() {
             p={0}
             chromeless
             onPress={() => {
-              Alert.alert('to recipies');
-              // replace above line with -> router.navigate("/{page-filename}");
+              router.navigate("/recipe");
             }}
           >
             <CookingPot />
