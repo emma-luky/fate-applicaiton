@@ -54,5 +54,4 @@ export function NavBar() {
         </YStack>
       </XStack>
   )
-
 }
