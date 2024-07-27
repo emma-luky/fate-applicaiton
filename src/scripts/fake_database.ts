@@ -1,0 +1,121 @@
+import 'dotenv/config';
+
+import { addDoc, collection, DocumentReference, getDocs } from 'firebase/firestore/lite';
+
+import { db } from '../support/firebase';
+
+async function main() {
+    const usersRef = collection(db, 'users');
+
+    const users = [
+    {
+        username: 'john',
+        school: 'University of Utah',
+        email: 'john@gmail.com',
+        phoneNumber: '999-999-9999',
+        hashedPassword: 'password',
+    },
+    {
+        username: 'jane',
+        school: 'University of Utah',
+        email: 'jane@gmail.com',
+        phoneNumber: '000-000-0000',
+        hashedPassword: 'password2',
+    }
+    ];
+
+    const usersArray: { ref: DocumentReference; data: typeof users[0] }[] = [];
+    for (const user of users) {
+        const userDocRef = await addDoc(usersRef, {
+            username: user.username,
+            school: user.school,
+            email: user.email,
+            phoneNumber: user.phoneNumber,
+            hashedPassword: user.hashedPassword,
+            createdAt: new Date().toISOString(),
+        });
+        usersArray.push({ ref: userDocRef, data: user });
+    }
+
+    const campusPosts = [
+    {
+        userID: usersArray[0].ref.id,
+        author: usersArray[0].data.username,
+        title: 'Good food!',
+        caption: 'Enjoying the beautiful scenery!',
+    },
+    {
+        userID: usersArray[0].ref.id,
+        author: usersArray[1].data.username,
+        title: 'Long line...',
+        caption: 'Panda express at the union has a super long line. Been waiting 20 minutes.',
+    },
+    {
+        userID: usersArray[0].ref.id,
+        author: usersArray[0].data.username,
+        title: 'PASTA!',
+        caption: 'The PHC\'s pasta bar is open!',
+    },
+    ];
+
+    const campusPostsRef = collection(db, 'posts');
+
+    for (const post of campusPosts) {
+    await addDoc(campusPostsRef, {
+        author: post.author,
+        title: post.title,
+        caption: post.caption,
+        createdAt: new Date().toISOString(),
+    });
+    }
+
+    const campusPostsSnapshot = await getDocs(campusPostsRef);
+
+    for (const post of campusPostsSnapshot.docs) {
+        console.log(post.id, post.data());
+    }
+
+    const recipePosts = [
+        {
+            userID: usersArray[0].ref.id,
+            author: usersArray[0].data.username,
+            title: 'Good food!',
+            caption: 'Enjoying the beautiful scenery!',
+        },
+        {
+            userID: usersArray[0].ref.id,
+            author: usersArray[1].data.username,
+            title: 'Long line...',
+            caption: 'Panda express at the union has a super long line. Been waiting 20 minutes.',
+        },
+        {
+            userID: usersArray[0].ref.id,
+            author: usersArray[0].data.username,
+            title: 'PASTA!',
+            caption: 'The PHC\'s pasta bar is open!',
+        },
+        ];
+    
+        const recipePostsRef = collection(db, 'posts');
+    
+        for (const post of recipePosts) {
+        await addDoc(recipePostsRef, {
+            author: post.author,
+            title: post.title,
+            caption: post.caption,
+            createdAt: new Date().toISOString(),
+        });
+        }
+    
+        const recipePostsSnapshot = await getDocs(recipePostsRef);
+    
+        for (const post of recipePostsSnapshot.docs) {
+            console.log(post.id, post.data());
+        }
+
+}
+
+main().catch((error) => {
+console.error(error);
+process.exit(1);
+});
