@@ -1,7 +1,7 @@
 import { Alert, View } from 'react-native';
-import { Bookmark, Heart } from '@tamagui/lucide-icons';
+import { Bookmark } from '@tamagui/lucide-icons';
 import { QueryDocumentSnapshot } from 'firebase/firestore/lite';
-import { Button, H5, Paragraph, SizableText, XStack, YStack } from 'tamagui';
+import { Button, H5, Paragraph, XStack, YStack } from 'tamagui';
 
 type Props = {
   post: QueryDocumentSnapshot;
@@ -14,6 +14,7 @@ export function PostView(props: Props) {
     <YStack gap={10}>
       <View key={post.id}>
         <H5>{post.data().title}</H5>
+        <Paragraph>{post.data().author}</Paragraph>
         <Paragraph>{post.data().caption}</Paragraph>
         <XStack gap={20}>
           <Button
