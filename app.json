@@ -23,7 +23,12 @@
     },
     "plugins": [
       "expo-router",
-      "expo-font"
+      [
+        "expo-font",
+        {
+          "fonts": ["./assets/fonts/Montserrat-VariableFont_wght.ttf", "./assets/fonts/Montserrat-Italic-VariableFont_wght.ttf", "./assets/fonts/Playwrite_BE_WAL-VariableFont_wght.ttf"]
+        }
+      ]
     ]
   }
 }

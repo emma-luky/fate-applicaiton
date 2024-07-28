@@ -1,7 +1,7 @@
 import { Button, XStack, YStack } from 'tamagui'
 import { School, CircleUserRound, CookingPot } from '@tamagui/lucide-icons';
 import { Alert } from 'react-native';
-import { router } from 'expo-router';
+import { router, Stack } from 'expo-router';
 
 export function NavBar() {
 
