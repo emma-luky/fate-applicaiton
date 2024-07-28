@@ -14,6 +14,11 @@ async function main() {
   for (const post of allPosts.docs) {
     await deleteDoc(post.ref);
   }
+
+  const allRecipes = await getDocs(collection(db, 'recipes'));
+  for (const recipe of allRecipes.docs) {
+    await deleteDoc(recipe.ref);
+  }
 }
 
 main().catch((error) => {
