@@ -183,7 +183,7 @@ export default function RecipePage() {
   };
 
   return (
-    <TamaguiProvider config={tamaguiConfig}>
+    <>
       <Stack.Screen options={{ title: 'Recipes' }} />
       <View style={styles.vertical}>
         <View style={styles.horizontal}>

@@ -1,7 +1,6 @@
 import { Button, XStack, YStack } from 'tamagui'
 import { School, CircleUserRound, CookingPot } from '@tamagui/lucide-icons';
-import { Alert } from 'react-native';
-import { router, Stack } from 'expo-router';
+import { router } from 'expo-router';
 
 export function NavBar() {
 
@@ -19,7 +18,7 @@ export function NavBar() {
             p={0}
             chromeless
             onPress={() => {
-              router.navigate("/recipe");
+              router.replace("/recipe");
             }}
           >
             <CookingPot />
@@ -31,7 +30,7 @@ export function NavBar() {
             p={0}
             chromeless
             onPress={() => {
-              router.navigate("/index");
+              router.replace("/");
             }}
           >
             <School />
@@ -43,7 +42,7 @@ export function NavBar() {
             p={0}
             chromeless
             onPress={() => {
-              router.navigate("/profile");
+              router.replace("/profile");
             }}
           >
             <CircleUserRound />
