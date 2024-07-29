@@ -17,7 +17,7 @@ export default function App() {
       <ScrollView flex={5}>
         <H1 alignSelf='center' marginBottom={15}>John</H1>
         <Avatar circular size="$6" alignSelf='center'>
-          <Avatar.Image src="http://picsum.photos/200/300"/>
+          <Avatar.Image src="http://picsum.photos/id/177/200/300"/>
         </Avatar>
         <Tabs defaultValue="Posts" marginTop={25}>
           <YStack flexDirection='column' alignItems='center'>

@@ -10,6 +10,7 @@ import { YStack } from 'tamagui';
 
 import { db } from '../support/firebase';
 import { PostView } from './PostView';
+import { RecipeView } from './RecipeView';
 
 export function UserPostsListView() {
   const [posts, setPosts] = useState<QueryDocumentSnapshot[]>([]);
@@ -40,7 +41,7 @@ export function UserPostsListView() {
         <PostView key={post.id} post={post} />
       ))}
       {recipes.map((recipe) => (
-        <PostView key={recipe.id} post={recipe} />
+        <RecipeView key={recipe.id} recipe={recipe} />
       ))}
     </YStack>
   );

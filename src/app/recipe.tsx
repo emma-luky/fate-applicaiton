@@ -6,7 +6,7 @@ import { NavBar } from '../components/NavBar';
 export default function App() {
   return (
     <>
-      <Stack.Screen options={{ title: 'Home' }} />
+      <Stack.Screen options={{ title: 'Recipes' }} />
       <ScrollView flex={1}>
         <RecipeListView />
       </ScrollView>

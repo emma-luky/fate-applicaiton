@@ -80,6 +80,7 @@ async function main() {
             userID: usersArray[0].ref.id,
             author: usersArray[0].data.username,
             title: 'Chicken Noodle Soup',
+            imageUrl: 'https://www.recipetineats.com/uploads/2017/05/Chicken-Noodle-Soup-from-scratch_3.jpg',
             caption: 'Easy and yummy for when you sick.',
             ingredients: 'chicken, water, noodles of your choice',
             recipe: 'Bring the water to a boil. Once te water is boiling, place your noodles in and cook for the expected amount of time. Meanwhile, cook your chicken in the oven at 400 degrees for 10 minutes. After, your chicken is cooked dice your chicken and place it in the pot with your cooked noodels. Enjoy!',
@@ -89,6 +90,7 @@ async function main() {
             userID: usersArray[0].ref.id,
             author: usersArray[1].data.username,
             title: 'Mashed Potatoes',
+            imageUrl: '',
             caption: 'So yummy, i eat it every day',
             ingredients: 'potatoes, butter',
             recipe: '1. peel and boil you potatoes until cooked through, about 20 minutes. \n' +
@@ -104,6 +106,7 @@ async function main() {
         await addDoc(recipePostsRef, {
             author: post.author,
             title: post.title,
+            imageUrl: post.imageUrl ? post.imageUrl : '#',
             caption: post.caption,
             ingredients: post.ingredients,
             recipe: post.recipe,

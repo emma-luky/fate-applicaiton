@@ -11,7 +11,7 @@ import { RecipeView } from './RecipeView';
 import { Alert } from 'react-native';
 
 export function RecipeListView() {
-  const [posts, setPosts] = useState<QueryDocumentSnapshot[]>([]);
+  const [recipes, setPosts] = useState<QueryDocumentSnapshot[]>([]);
 
   // for when the page loads
   useEffect(() => {
@@ -24,15 +24,10 @@ export function RecipeListView() {
   }, []);
   
   return (
-    <Button
-      onPress={() => {
-      Alert.alert('to recipe');
-      }}>
-      <YStack gap={10} margin={10}>
-        {posts.map((post) => (
-          <RecipeView key={post.id} post={post} />
-        ))}
-      </YStack>
-    </Button>
+    <YStack gap={10} margin={10}>
+      {recipes.map((recipe) => (
+        <RecipeView key={recipe.id} recipe={recipe} />
+      ))}
+    </YStack>
   );
 }
