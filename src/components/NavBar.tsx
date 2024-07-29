@@ -31,10 +31,7 @@ export function NavBar() {
             p={0}
             chromeless
             onPress={() => {
-              Alert.alert("Home");
-              // still working on getting the navbar to go to the index page
-              // giving me some troubles but I will figure it out and should
-              // not alter development
+              router.navigate("/index");
             }}
           >
             <School />
