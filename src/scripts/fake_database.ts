@@ -14,6 +14,7 @@ async function main() {
         email: 'john@gmail.com',
         phoneNumber: '999-999-9999',
         hashedPassword: 'password',
+        savedPosts: ['4UV5sfWl6UhpbkPfzubq']
     },
     {
         username: 'jane',
@@ -21,6 +22,7 @@ async function main() {
         email: 'jane@gmail.com',
         phoneNumber: '000-000-0000',
         hashedPassword: 'password2',
+        savedPosts: []
     }
     ];
 

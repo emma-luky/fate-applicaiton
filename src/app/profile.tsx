@@ -1,7 +1,8 @@
 import { Stack } from 'expo-router';
-import { H1, ScrollView, Tabs, SizableText, H5, YStack, Avatar } from 'tamagui';
+import { H1, ScrollView, Tabs, SizableText, YStack, Avatar } from 'tamagui';
 import { NavBar } from '../components/NavBar';
 import { UserPostsListView } from '../components/UserPostsListView';
+import { UserSavedPostsListView } from '../components/UserSavedPostsListView';
 
 export default function App() {
 
@@ -9,9 +10,7 @@ export default function App() {
     <>
       <Stack.Screen
         options={{
-          title: 'Profile',
-          headerBackTitleVisible: false,
-        //   headerBackButtonMenuEnabled: false
+          title: 'Profile'
         }}
       />
       <ScrollView flex={5}>
@@ -31,10 +30,10 @@ export default function App() {
             </Tabs.List>
 
             <Tabs.Content value="Posts" alignSelf='flex-start'>
-              <UserPostsListView></UserPostsListView>
+              <UserPostsListView />
             </Tabs.Content>
-            <Tabs.Content value="Saved">
-              <H5>Saved</H5>
+            <Tabs.Content value="Saved" alignSelf='flex-start'>
+              <UserSavedPostsListView />
             </Tabs.Content>
           </YStack>
         </Tabs>
