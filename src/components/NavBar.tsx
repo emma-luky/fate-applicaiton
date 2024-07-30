@@ -1,14 +1,14 @@
+import { Alert } from 'react-native';
 import { Button, XStack, YStack } from 'tamagui'
 import { School, CircleUserRound, CookingPot } from '@tamagui/lucide-icons';
 import { router } from 'expo-router';
+import { Button, XStack, YStack } from 'tamagui';
 
 export function NavBar() {
-
   return (
-
-      <XStack
+    <XStack
       flex={0.105}
-      justifyContent='space-around'
+      justifyContent="space-around"
       borderWidth={2}
       borderColor="$color"
       padding="$2"
