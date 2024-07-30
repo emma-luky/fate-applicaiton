@@ -1,8 +1,8 @@
 import { Stack } from 'expo-router';
 import { ScrollView } from 'tamagui';
 
-import { PostListView } from '../components/PostListView';
 import { NavBar } from '../components/NavBar';
+import { PostListView } from '../components/PostListView';
 
 export default function App() {
   return (
