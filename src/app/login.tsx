@@ -8,7 +8,7 @@ import SignUp from './signup';
 export default function App() {
   return (
     <>
-      <Stack.Screen options={{ title: 'Hey' }} />
+      <Stack.Screen options={{ title: 'Login' }} />
       <ScrollView flex={1}>
         <NewUserForm>
           <SafeAreaView style={{ marginTop: 222 }}></SafeAreaView>
