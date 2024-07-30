@@ -9,14 +9,13 @@ export default function App() {
 
   return (
     <>
-       <TamaguiProvider config={tamaguiConfig}>
-      {/* Your app components */}
-      <Stack.Screen options={{ title: 'Home' }} />
-      <ScrollView flex={1}>
-        <PostListView />
-      </ScrollView>
-      <NavBar />
-    </TamaguiProvider>
+      <TamaguiProvider config={tamaguiConfig}>
+        <Stack.Screen options={{ title: 'Home' }} />
+        <ScrollView flex={1}>
+          <PostListView />
+        </ScrollView>
+        <NavBar />
+      </TamaguiProvider>
     </>
   );
 }
