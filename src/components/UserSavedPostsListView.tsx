@@ -64,10 +64,10 @@ export function UserSavedPostsListView() {
   return (
     <YStack gap={10} margin={10}>
       {posts.map((post) => (
-        <PostView key={post.id} post={post} />
+        <PostView key={post.id} post={post} user={user}/>
       ))}
       {recipes.map((recipe) => (
-        <RecipeView key={recipe.id} recipe={recipe} />
+        <RecipeView key={recipe.id} recipe={recipe} user={user} />
       ))}
     </YStack>
   );

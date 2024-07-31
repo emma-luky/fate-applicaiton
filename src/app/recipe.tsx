@@ -10,7 +10,7 @@ export default function App() {
   return (
     <>
       <TamaguiProvider config={tamaguiConfig}>
-        <Stack.Screen options={{ title: 'Home' }} />
+        <Stack.Screen options={{ title: 'Recipes' }} />
         <ScrollView flex={1}>
           <RecipeListView />
         </ScrollView>

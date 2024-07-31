@@ -15,6 +15,7 @@ import { RecipeView } from './RecipeView';
 export function UserPostsListView() {
   const [posts, setPosts] = useState<QueryDocumentSnapshot[]>([]);
   const [recipes, setRecipes] = useState<QueryDocumentSnapshot[]>([]);
+  const [user, setUser] = useState<QueryDocumentSnapshot[]>([]);
 
   // for when the page loads
   useEffect(() => {
@@ -38,10 +39,10 @@ export function UserPostsListView() {
   return (
     <YStack gap={10} margin={10}>
       {posts.map((post) => (
-        <PostView key={post.id} post={post} />
+        <PostView key={post.id} post={post} user={user}/>
       ))}
       {recipes.map((recipe) => (
-        <RecipeView key={recipe.id} recipe={recipe} />
+        <RecipeView key={recipe.id} recipe={recipe} user={user}/>
       ))}
     </YStack>
   );
