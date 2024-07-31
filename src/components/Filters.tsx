@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { QueryDocumentSnapshot } from 'firebase/firestore/lite';
 import { ScrollView, SizableText, XStack } from 'tamagui';
@@ -10,20 +11,15 @@ export function Filters(props: Props) {
     const post = props.post;
     const filters = post.data().filters;
 
-    if (!Array.isArray(filters)) {
-        // console.error('Post data filters is undefined or not an array');
-        console.error(typeof filters);
+    if (!Array.isArray(filters) || filters.length === 0) {
         return null;
     }
-
-    console.log('Post ID:', post.id);
-    console.log('Filters:', filters);
 
     return (
         <ScrollView>
             <XStack gap={20}>
-                {filters.map((filter) => (
-                    <SizableText key={ filter }>{ filter }</SizableText>
+                {filters.map((filter, index) => (
+                    <SizableText key={`${filter}-${index}`}>{ filter }</SizableText>
                 ))}
             </XStack>
         </ScrollView>

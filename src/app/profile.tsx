@@ -1,7 +1,10 @@
+import { LogIn } from '@tamagui/lucide-icons';
 import { Stack } from 'expo-router';
-import { H1, ScrollView, Tabs, SizableText, H5, YStack, Avatar } from 'tamagui';
+import { Avatar, H1, H5, ScrollView, SizableText, Tabs, YStack } from 'tamagui';
+import { PostListView } from '../components/PostListView';
 import { NavBar } from '../components/NavBar';
 import { UserPostsListView } from '../components/UserPostsListView';
+import { UserSavedPostsListView } from '../components/UserSavedPostsListView';
 
 export default function App() {
 
@@ -9,9 +12,7 @@ export default function App() {
     <>
       <Stack.Screen
         options={{
-          title: 'Profile',
-          headerBackTitleVisible: false,
-        //   headerBackButtonMenuEnabled: false
+          title: 'Profile'
         }}
       />
       <ScrollView flex={5}>
@@ -20,21 +21,29 @@ export default function App() {
           <Avatar.Image src="http://picsum.photos/id/177/200/300"/>
         </Avatar>
         <Tabs defaultValue="Posts" marginTop={25}>
-          <YStack flexDirection='column' alignItems='center'>
+          <YStack flexDirection="column" alignItems="center">
             <Tabs.List>
-              <Tabs.Tab value="Posts" width={195}>
+              <Tabs.Tab value="Posts" width={125}>
                 <SizableText>Posts</SizableText>
               </Tabs.Tab>
-              <Tabs.Tab value="Saved" width={195}>
+              <Tabs.Tab value="Saved" width={125}>
                 <SizableText>Saved</SizableText>
+              </Tabs.Tab>
+
+              <Tabs.Tab value="New" width={125}>
+                <SizableText>New</SizableText>
               </Tabs.Tab>
             </Tabs.List>
 
             <Tabs.Content value="Posts" alignSelf='flex-start'>
-              <UserPostsListView></UserPostsListView>
+              <UserPostsListView />
             </Tabs.Content>
-            <Tabs.Content value="Saved">
-              <H5>Saved</H5>
+            <Tabs.Content value="Saved" alignSelf='flex-start'>
+              <UserSavedPostsListView />
+            </Tabs.Content>
+
+            <Tabs.Content value="New">
+              <H5>New Post</H5>
             </Tabs.Content>
           </YStack>
         </Tabs>
