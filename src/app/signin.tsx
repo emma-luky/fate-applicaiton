@@ -1,34 +1,34 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import React, { useState } from 'react';
-import { Alert, Button, TextInput } from 'react-native';
+import { useState } from 'react';
+import { Button } from 'react-native';
 import { router } from 'expo-router';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { Text, View } from 'tamagui';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { TamaguiProvider, Text, Input } from 'tamagui';
+import tamaguiConfig from '../config/tamagui.config';
 
-import { auth } from './firebase'; // Ensure this path is correct
-
-function SignIn() {
+export default function App() {
   const [values, setValues] = useState({ email: '', password: '' });
-
+  const auth = getAuth();
   const onSubmit = async () => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(
+    try{
+      await signInWithEmailAndPassword(
         auth,
         values.email,
         values.password,
       );
-      console.log(userCredential);
-      Alert.alert('Success', 'User signed in successfully!');
-    } catch (error) {
-      console.error('Error signing in:', error);
-      Alert.alert('Error', error.message);
+      router.replace('/post');
+    } catch(error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.error(errorCode);
+      console.error(errorMessage);
     }
   };
 
   return (
-    <View>
+    <TamaguiProvider config={tamaguiConfig}>
       <Text> Email </Text>
-      <TextInput
+      <Input
         onChangeText={(text) => setValues({ ...values, email: text })}
         value={values.email}
         keyboardType="email-address"
@@ -36,7 +36,7 @@ function SignIn() {
       />
 
       <Text> Password </Text>
-      <TextInput
+      <Input
         onChangeText={(text) => setValues({ ...values, password: text })}
         value={values.password}
         secureTextEntry
@@ -46,11 +46,9 @@ function SignIn() {
       <Button
         title="Don't have an account? Sign Up"
         onPress={() => {
-          router.navigate('/signup');
+          router.replace('/signup');
         }}
       />
-    </View>
+    </TamaguiProvider>
   );
 }
-
-export default SignIn;

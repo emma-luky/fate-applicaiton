@@ -1,27 +1,35 @@
-import { LogIn } from '@tamagui/lucide-icons';
 import { Stack } from 'expo-router';
 import { Avatar, H1, H5, ScrollView, SizableText, Tabs, YStack } from 'tamagui';
-import { PostListView } from '../components/PostListView';
 import { NavBar } from '../components/NavBar';
 import { UserPostsListView } from '../components/UserPostsListView';
 import { UserSavedPostsListView } from '../components/UserSavedPostsListView';
 import { useEffect, useState } from 'react';
-import { collection, getDoc, getDocs, query, QueryDocumentSnapshot, where } from 'firebase/firestore/lite';
+import { collection, doc, DocumentSnapshot, getDoc, getDocs, query, QueryDocumentSnapshot, where } from 'firebase/firestore/lite';
 import { db } from '../support/firebase';
+import { getAuth } from 'firebase/auth';
 
 export default function App() {
-  const [user, setUser] = useState<QueryDocumentSnapshot[]>([]);
+  const [user, setUserData] = useState<DocumentSnapshot>();
 
   // for when the page loads
   useEffect(() => {
-    const getUser = async () => {
-      const usersRef = collection(db, 'users');
-      const q = query(usersRef, where('username', '==', 'john'));
-      const userSnapshot = (await getDocs(q));
-      setUser(userSnapshot.docs);
-    }
-    void getUser();
-  });
+    const fetchUserData = async () => {
+      const auth = getAuth();
+      const currentUser = auth.currentUser;
+
+      if (currentUser) {
+        console.log('User is signed in:', currentUser);
+        const userDocRef = doc(db, 'users', currentUser.uid);
+        const userSnapshot = await getDoc(userDocRef);
+
+        setUserData(userSnapshot);
+      } else {
+        console.log('No user is signed in');
+      }
+    };
+
+    fetchUserData();
+  }, []);
   return (
     <>
       <Stack.Screen
@@ -30,7 +38,7 @@ export default function App() {
         }}
       />
       <ScrollView flex={5}>
-        <H1 alignSelf='center' marginBottom={15}>{user[0]?.data().username}</H1>
+        <H1 alignSelf='center' marginBottom={15}>{user.data().username}</H1>
         <Avatar circular size='$6' alignSelf='center'>
           <Avatar.Image src='http://picsum.photos/id/177/200/300'/>
         </Avatar>

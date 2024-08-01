@@ -18,8 +18,8 @@ export function PostListView() {
   useEffect(() => {
     const getUser = async () => {
       const usersRef = collection(db, 'users');
-      const q = query(usersRef, where('username', '==', 'john'));
-      const userSnapshot = (await getDocs(q));
+      const q = query(usersRef, where('id', '==', 'p73LjQXjRETjOvma2aPAOfZjQqp1'));
+      const userSnapshot = await getDocs(q);
       // const userDocRef = doc(db, 'users', 'oufQkzSGKmZVepCr7O5l');
       setUser(userSnapshot.docs);
     }

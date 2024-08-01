@@ -5,56 +5,23 @@ import { addDoc, collection, DocumentReference, getDocs } from 'firebase/firesto
 import { db } from '../support/firebase';
 
 async function main() {
-    const usersRef = collection(db, 'users');
-
-    const users = [
-    {
-        username: 'john',
-        school: 'University of Utah',
-        email: 'john@gmail.com',
-        phoneNumber: '999-999-9999',
-        hashedPassword: 'password',
-        savedPosts: ['4UV5sfWl6UhpbkPfzubq']
-    },
-    {
-        username: 'jane',
-        school: 'University of Utah',
-        email: 'jane@gmail.com',
-        phoneNumber: '000-000-0000',
-        hashedPassword: 'password2',
-        savedPosts: []
-    }
-    ];
-
-    const usersArray: { ref: DocumentReference; data: typeof users[0] }[] = [];
-    for (const user of users) {
-        const userDocRef = await addDoc(usersRef, {
-            username: user.username,
-            school: user.school,
-            email: user.email,
-            phoneNumber: user.phoneNumber,
-            hashedPassword: user.hashedPassword,
-            createdAt: new Date().toISOString(),
-        });
-        usersArray.push({ ref: userDocRef, data: user });
-    }
-
+   collection(db, 'users');
     const campusPosts = [
     {
-        userID: usersArray[0].ref.id,
-        author: usersArray[0].data.username,
+        userID: 'p73LjQXjRETjOvma2aPAOfZjQqp1',
+        author: 'john',
         title: 'Good food!',
         caption: 'Enjoying the beautiful scenery!',
     },
     {
-        userID: usersArray[0].ref.id,
-        author: usersArray[1].data.username,
+        userID: 'ylKWWdi0bTd5gMd9gS7yJBfYHTo1',
+        author: 'jane',
         title: 'Long line...',
         caption: 'Panda express at the union has a super long line. Been waiting 20 minutes.',
     },
     {
-        userID: usersArray[0].ref.id,
-        author: usersArray[0].data.username,
+        userID: 'p73LjQXjRETjOvma2aPAOfZjQqp1',
+        author: 'john',
         title: 'PASTA!',
         caption: 'The PHC\'s pasta bar is open!',
     },
@@ -79,8 +46,8 @@ async function main() {
 
     const recipePosts = [
         {
-            userID: usersArray[0].ref.id,
-            author: usersArray[0].data.username,
+            userID: 'p73LjQXjRETjOvma2aPAOfZjQqp1',
+            author: 'john',
             title: 'Chicken Noodle Soup',
             imageUrl: 'https://www.recipetineats.com/uploads/2017/05/Chicken-Noodle-Soup-from-scratch_3.jpg',
             caption: 'Easy and yummy for when you sick.',
@@ -89,8 +56,8 @@ async function main() {
             filters: ['easy', '$']
         },
         {
-            userID: usersArray[0].ref.id,
-            author: usersArray[1].data.username,
+            userID: 'ylKWWdi0bTd5gMd9gS7yJBfYHTo1',
+            author: 'jane',
             title: 'Mashed Potatoes',
             imageUrl: '',
             caption: 'So yummy, i eat it every day',

@@ -7,7 +7,6 @@ import { Button, H5, Paragraph, XStack, YStack, Image } from 'tamagui';
 import { Filters } from './Filters';
 import { useEffect, useState } from 'react';
 import { db } from '../support/firebase';
-
 type Props = {
   recipe: QueryDocumentSnapshot;
   user: QueryDocumentSnapshot[] | undefined;

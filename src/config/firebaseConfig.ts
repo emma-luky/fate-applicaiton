@@ -1,4 +1,5 @@
-import type { FirebaseOptions } from 'firebase/app';
+import { initializeApp, type FirebaseOptions } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
 
 const PROJECT_ID = process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID ?? '';
 
@@ -11,3 +12,7 @@ export const firebaseConfig: FirebaseOptions = {
   appId: process.env.EXPO_PUBLIC_FIREBASE_APP_ID,
 };
 
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+export { auth };
