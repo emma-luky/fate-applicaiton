@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { router, Stack } from 'expo-router';
