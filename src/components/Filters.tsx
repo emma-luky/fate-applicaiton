@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { QueryDocumentSnapshot } from 'firebase/firestore/lite';
+import { DocumentSnapshot } from 'firebase/firestore/lite';
 import { ScrollView, SizableText, XStack } from 'tamagui';
 
 type Props = {
-  post: QueryDocumentSnapshot;
+  post: DocumentSnapshot | undefined;
 };
 
 export function Filters(props: Props) {
     const post = props.post;
-    const filters = post.data().filters;
+    const filters = post?.data()?.filters;
 
     if (!Array.isArray(filters) || filters.length === 0) {
         return null;

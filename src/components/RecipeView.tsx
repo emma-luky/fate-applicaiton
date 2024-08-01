@@ -2,14 +2,15 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Alert, View } from 'react-native';
 import { Bookmark } from '@tamagui/lucide-icons';
-import { arrayRemove, arrayUnion, DocumentSnapshot, QueryDocumentSnapshot, updateDoc } from 'firebase/firestore/lite';
+import { arrayRemove, arrayUnion, DocumentSnapshot, updateDoc } from 'firebase/firestore/lite';
 import { Button, H5, Paragraph, XStack, YStack, Image } from 'tamagui';
 import { Filters } from './Filters';
 import { Ingredients } from './Ingredients';
 import { useEffect, useState } from 'react';
+import { router } from 'expo-router';
 
 type Props = {
-  recipe: QueryDocumentSnapshot;
+  recipe: DocumentSnapshot;
   user: DocumentSnapshot | undefined;
 };
 
@@ -50,16 +51,16 @@ export function RecipeView(props: Props) {
   }
 
   return (
-    <YStack gap={10}>
+    <YStack gap={10} onPress={() => {router.navigate(`/recipe-info?recipeId=${recipe.id}`)}}>
       <View key={recipe.id}>
-        <H5>{recipe.data().title}</H5>
-        <Paragraph>{recipe.data().author}</Paragraph>
-        {recipe.data().imageUrl !== '#' && <Image
+        <H5>{recipe.data()?.title}</H5>
+        <Paragraph>{recipe.data()?.author}</Paragraph>
+        {recipe.data()?.imageUrl !== '#' && <Image
           width="100%"
           aspectRatio={1}
-          source={{ uri: String(recipe.data().imageUrl) }}
+          source={{ uri: String(recipe.data()?.imageUrl) }}
         />}
-        <Paragraph>{recipe.data().caption}</Paragraph>
+        <Paragraph>{recipe.data()?.caption}</Paragraph>
         <Ingredients post={recipe}></Ingredients>
         <Filters post={recipe}></Filters>
         <XStack gap={20}>
