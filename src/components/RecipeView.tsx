@@ -2,14 +2,14 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Alert, View } from 'react-native';
 import { Bookmark } from '@tamagui/lucide-icons';
-import { arrayRemove, arrayUnion, doc, getDoc, QueryDocumentSnapshot, updateDoc } from 'firebase/firestore/lite';
+import { arrayRemove, arrayUnion, DocumentSnapshot, QueryDocumentSnapshot, updateDoc } from 'firebase/firestore/lite';
 import { Button, H5, Paragraph, XStack, YStack, Image } from 'tamagui';
 import { Filters } from './Filters';
 import { useEffect, useState } from 'react';
-import { db } from '../support/firebase';
+
 type Props = {
   recipe: QueryDocumentSnapshot;
-  user: QueryDocumentSnapshot[] | undefined;
+  user: DocumentSnapshot | undefined;
 };
 
 export function RecipeView(props: Props) {
@@ -18,26 +18,24 @@ export function RecipeView(props: Props) {
   const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const userDocRef = doc(db, 'users', user[0].id);
-      const userDoc = await getDoc(userDocRef);
-      if (userDoc.data().savedPosts.includes(recipe.id)){
+    const fetchUserData = () => {
+      if (user?.data()?.savedPosts.includes(recipe.id)){
         setIsSaved(true);
       }
     };
-    void fetchUserData();
-  });
+    fetchUserData();
+  }, [user, recipe.id]);
 
   const handleSavePost = async () => {
     try {
       if(isSaved){
-        await updateDoc(userDocRef, {
+        await updateDoc(user.ref, {
           savedPosts: arrayRemove(recipe.id),
         });
         setIsSaved(false);
       }
       else{
-        await updateDoc(userDocRef, {
+        await updateDoc(user.ref, {
           savedPosts: arrayUnion(recipe.id),
         });
         setIsSaved(true);

@@ -1,27 +1,34 @@
 import { useEffect, useState } from 'react';
 import {
   collection,
+  doc,
+  getDoc,
   getDocs,
-  query,
   QueryDocumentSnapshot,
-  where,
+  DocumentSnapshot
 } from 'firebase/firestore/lite';
 import { YStack } from 'tamagui';
 import { db } from '../support/firebase';
 import { PostView } from './PostView';
+import { getAuth } from 'firebase/auth';
 
 export function PostListView() {
   const [posts, setPosts] = useState<QueryDocumentSnapshot[]>([]);
-  const [user, setUser] = useState<QueryDocumentSnapshot[]>();
+  const [user, setUser] = useState<DocumentSnapshot>();
   
   // for when the page loads
   useEffect(() => {
     const getUser = async () => {
-      const usersRef = collection(db, 'users');
-      const q = query(usersRef, where('id', '==', 'p73LjQXjRETjOvma2aPAOfZjQqp1'));
-      const userSnapshot = await getDocs(q);
-      // const userDocRef = doc(db, 'users', 'oufQkzSGKmZVepCr7O5l');
-      setUser(userSnapshot.docs);
+      const auth = getAuth();
+      const currentUser = auth.currentUser;
+      if(currentUser){
+        const userDocRef = doc(db, 'users', currentUser.uid);
+        const userDocSnap = await getDoc(userDocRef);
+        setUser(userDocSnap);
+      }
+      else{
+        console.log('No user signed in');
+      }
     }
     void getUser();
     const getPosts = async () => {

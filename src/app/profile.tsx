@@ -4,32 +4,31 @@ import { NavBar } from '../components/NavBar';
 import { UserPostsListView } from '../components/UserPostsListView';
 import { UserSavedPostsListView } from '../components/UserSavedPostsListView';
 import { useEffect, useState } from 'react';
-import { collection, doc, DocumentSnapshot, getDoc, getDocs, query, QueryDocumentSnapshot, where } from 'firebase/firestore/lite';
+import { doc, DocumentSnapshot, getDoc } from 'firebase/firestore/lite';
 import { db } from '../support/firebase';
 import { getAuth } from 'firebase/auth';
 
 export default function App() {
-  const [user, setUserData] = useState<DocumentSnapshot>();
+  const [user, setUser] = useState<DocumentSnapshot>();
 
   // for when the page loads
   useEffect(() => {
-    const fetchUserData = async () => {
+    const getUser = async () => {
       const auth = getAuth();
       const currentUser = auth.currentUser;
 
       if (currentUser) {
         console.log('User is signed in:', currentUser);
         const userDocRef = doc(db, 'users', currentUser.uid);
-        const userSnapshot = await getDoc(userDocRef);
-
-        setUserData(userSnapshot);
+        const userDocSnap = await getDoc(userDocRef);
+        setUser(userDocSnap);
       } else {
         console.log('No user is signed in');
       }
-    };
-
-    fetchUserData();
+    }
+    void getUser();
   }, []);
+
   return (
     <>
       <Stack.Screen
@@ -38,7 +37,7 @@ export default function App() {
         }}
       />
       <ScrollView flex={5}>
-        <H1 alignSelf='center' marginBottom={15}>{user.data().username}</H1>
+        <H1 alignSelf='center' marginBottom={15}>{user?.data()?.username}</H1>
         <Avatar circular size='$6' alignSelf='center'>
           <Avatar.Image src='http://picsum.photos/id/177/200/300'/>
         </Avatar>
@@ -58,10 +57,10 @@ export default function App() {
             </Tabs.List>
 
             <Tabs.Content value='Posts' alignSelf='flex-start'>
-              <UserPostsListView />
+              <UserPostsListView user={user}/>
             </Tabs.Content>
             <Tabs.Content value='Saved' alignSelf='flex-start'>
-              <UserSavedPostsListView />
+              <UserSavedPostsListView user={user}/>
             </Tabs.Content>
 
             <Tabs.Content value="New">

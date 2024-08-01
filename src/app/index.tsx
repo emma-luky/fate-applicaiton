@@ -23,7 +23,6 @@ export default function App() {
       <Button
         title="Sign In"
         onPress={() => {
-          console.log('Switching to Sign up');
           router.replace('/signin');
         }}
       />

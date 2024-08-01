@@ -2,14 +2,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Alert, View } from 'react-native';
 import { Bookmark } from '@tamagui/lucide-icons';
-import { arrayRemove, arrayUnion, doc, DocumentReference, getDoc, QueryDocumentSnapshot, updateDoc } from 'firebase/firestore/lite';
+import { arrayRemove, arrayUnion, DocumentSnapshot, QueryDocumentSnapshot, updateDoc } from 'firebase/firestore/lite';
 import { Button, H5, Paragraph, XStack, YStack } from 'tamagui';
 import { useEffect, useState } from 'react';
-import { db } from '../support/firebase';
 
 type Props = {
   post: QueryDocumentSnapshot;
-  user: QueryDocumentSnapshot[] | undefined;
+  user: DocumentSnapshot | undefined;
 };
 
 export function PostView(props: Props) {
@@ -18,33 +17,29 @@ export function PostView(props: Props) {
   const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const userDocRef = doc(db, 'users', user[0].id);
-      const userDoc = await getDoc(userDocRef);
-      if (userDoc.data().savedPosts.includes(post.id)){
+    const fetchUserData = () => {
+      if (user?.data()?.savedPosts.includes(post.id)){
         setIsSaved(true);
       }
     };
-
-    void fetchUserData();
-  });
+    fetchUserData();
+  }, [user, post.id]);
 
   const handleSavePost = async () => {
     try {
       if(isSaved){
-        await updateDoc(userDocRef, {
+        await updateDoc(user.ref, {
           savedPosts: arrayRemove(post.id),
         });
         setIsSaved(false);
       }
       else{
-        await updateDoc(userDocRef, {
+        await updateDoc(user.ref, {
           savedPosts: arrayUnion(post.id),
         });
         setIsSaved(true);
         Alert.alert('Post saved!');
       }
-      
     } catch (error) {
       console.error('Error saving post:', error);
       Alert.alert('Failed to save post.');

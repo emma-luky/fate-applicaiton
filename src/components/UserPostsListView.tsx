@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
   collection,
+  DocumentSnapshot,
   getDocs,
   query,
   QueryDocumentSnapshot,
@@ -12,10 +13,14 @@ import { db } from '../support/firebase';
 import { PostView } from './PostView';
 import { RecipeView } from './RecipeView';
 
-export function UserPostsListView() {
+type Props = {
+  user: DocumentSnapshot | undefined;
+};
+
+export function UserPostsListView(props: Props) {
   const [posts, setPosts] = useState<QueryDocumentSnapshot[]>([]);
   const [recipes, setRecipes] = useState<QueryDocumentSnapshot[]>([]);
-  const [user, setUser] = useState<QueryDocumentSnapshot[]>([]);
+  const user = props.user;
 
   // for when the page loads
   useEffect(() => {
