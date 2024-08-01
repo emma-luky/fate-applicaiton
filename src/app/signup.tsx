@@ -3,15 +3,22 @@ import { useState } from 'react';
 import { Alert, Button } from 'react-native';
 import { router } from 'expo-router';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
-import { Input, TamaguiProvider, Text } from 'tamagui';
 import { doc, setDoc } from 'firebase/firestore/lite';
-import { db } from '../support/firebase';
-import tamaguiConfig from '../config/tamagui.config';
+import { Input, TamaguiProvider, Text } from 'tamagui';
+
 import { SchoolDropdown } from '../components/SchoolDropdown';
+import tamaguiConfig from '../config/tamagui.config';
+import { db } from '../support/firebase';
 
 export default function App() {
   const auth = getAuth();
-  const [values, setValues] = useState({ username: '', email: '', password: '' , phoneNumber: '', school: ''});
+  const [values, setValues] = useState({
+    username: '',
+    email: '',
+    password: '',
+    phoneNumber: '',
+    school: '',
+  });
 
   const onSubmit = async () => {
     try {
@@ -27,7 +34,7 @@ export default function App() {
         school: values.school,
         email: values.email,
         phoneNumber: values.phoneNumber,
-        savedPosts: []
+        savedPosts: [],
       });
       Alert.alert('Success', 'User registered successfully!');
       router.replace('/post');
@@ -44,11 +51,13 @@ export default function App() {
     <>
       <TamaguiProvider config={tamaguiConfig}>
         <Text> Username </Text>
-          <Input
-            onChangeText={(username) => setValues({ ...values, username: username })}
-            value={values.username}
-            autoCapitalize="none"
-          />
+        <Input
+          onChangeText={(username) =>
+            setValues({ ...values, username: username })
+          }
+          value={values.username}
+          autoCapitalize="none"
+        />
 
         <Text> Email </Text>
         <Input
@@ -56,14 +65,16 @@ export default function App() {
           value={values.email}
           keyboardType="email-address"
           autoCapitalize="none"
-          autoComplete='email'
+          autoComplete="email"
         />
 
         <Text> Phone Number </Text>
         <Input
-          onChangeText={(phoneNumber) => setValues({ ...values, phoneNumber: phoneNumber })}
+          onChangeText={(phoneNumber) =>
+            setValues({ ...values, phoneNumber: phoneNumber })
+          }
           value={values.phoneNumber}
-          keyboardType='phone-pad'
+          keyboardType="phone-pad"
         />
 
         <Text> School </Text>
@@ -73,7 +84,9 @@ export default function App() {
 
         <Text> Password </Text>
         <Input
-          onChangeText={(password) => setValues({ ...values, password: password })}
+          onChangeText={(password) =>
+            setValues({ ...values, password: password })
+          }
           value={values.password}
           secureTextEntry
         />
