@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { styles } from '@/assets/styles';
 import { DocumentSnapshot } from 'firebase/firestore/lite';
 import { ScrollView, SizableText, XStack } from 'tamagui';
 
@@ -19,7 +20,7 @@ export function Ingredients(props: Props) {
         <ScrollView>
             <XStack flexWrap='wrap'>
                 {ingredients.map((ingredient, index) => (
-                    <SizableText marginRight={20} key={`${ingredient}-${index}`}>{ ingredient }</SizableText>
+                    <SizableText style={styles.descriptionsContainer} key={`${ingredient}-${index}`}>{ ingredient }</SizableText>
                 ))}
             </XStack>
         </ScrollView>

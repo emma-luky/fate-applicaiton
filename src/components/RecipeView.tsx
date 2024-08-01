@@ -8,6 +8,7 @@ import { Filters } from './Filters';
 import { Ingredients } from './Ingredients';
 import { useEffect, useState } from 'react';
 import { router } from 'expo-router';
+import { styles } from '@/assets/styles';
 
 type Props = {
   recipe: DocumentSnapshot;
@@ -51,7 +52,7 @@ export function RecipeView(props: Props) {
   }
 
   return (
-    <YStack gap={10} onPress={() => {router.navigate(`/recipe-info?recipeId=${recipe.id}`)}}>
+    <YStack style={styles.post} onPress={() => {router.navigate(`/recipe-info?recipeId=${recipe.id}`)}}>
       <View key={recipe.id}>
         <H5>{recipe.data()?.title}</H5>
         <Paragraph>{recipe.data()?.author}</Paragraph>

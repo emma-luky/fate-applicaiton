@@ -78,7 +78,7 @@ export default function App() {
 
     return (
         <>
-            <Stack.Screen options={{ title: 'Recipe Information' }} />
+            <Stack.Screen options={{ title: 'Recipe Information', headerBackTitleVisible: false }} />
             <ScrollView>
                 <YStack gap={10} margin={20}>
                     <View key={recipe?.id}>

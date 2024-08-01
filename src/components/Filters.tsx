@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { styles } from '@/assets/styles';
 import { DocumentSnapshot } from 'firebase/firestore/lite';
 import { ScrollView, SizableText, XStack } from 'tamagui';
 
@@ -19,7 +20,7 @@ export function Filters(props: Props) {
         <ScrollView>
             <XStack gap={20}>
                 {filters.map((filter, index) => (
-                    <SizableText key={`${filter}-${index}`}>{ filter }</SizableText>
+                    <SizableText style={styles.descriptionsContainer} key={`${filter}-${index}`}>{ filter }</SizableText>
                 ))}
             </XStack>
         </ScrollView>

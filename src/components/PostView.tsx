@@ -5,6 +5,7 @@ import { Bookmark } from '@tamagui/lucide-icons';
 import { arrayRemove, arrayUnion, DocumentSnapshot, QueryDocumentSnapshot, updateDoc } from 'firebase/firestore/lite';
 import { Button, H5, Paragraph, XStack, YStack } from 'tamagui';
 import { useEffect, useState } from 'react';
+import { styles } from '@/assets/styles';
 
 type Props = {
   post: QueryDocumentSnapshot;
@@ -47,7 +48,7 @@ export function PostView(props: Props) {
   };
 
   return (
-    <YStack gap={10}>
+    <YStack style={styles.post}>
       <View key={post.id}>
         <H5>{post.data().title}</H5>
         <Paragraph>{post.data().author}</Paragraph>
