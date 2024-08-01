@@ -17,9 +17,9 @@ export function Ingredients(props: Props) {
 
     return (
         <ScrollView>
-            <XStack gap={20}>
+            <XStack flexWrap='wrap'>
                 {ingredients.map((ingredient, index) => (
-                    <SizableText key={`${ingredient}-${index}`}>{ ingredient }</SizableText>
+                    <SizableText marginRight={20} key={`${ingredient}-${index}`}>{ ingredient }</SizableText>
                 ))}
             </XStack>
         </ScrollView>

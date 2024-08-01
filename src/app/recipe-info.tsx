@@ -106,7 +106,7 @@ export default function App() {
                         <Paragraph>{recipe?.data()?.recipe}</Paragraph>
                         <H5>Ingredients</H5>
                         <Ingredients post={recipe}></Ingredients>
-                        <H5>Recipe Level</H5>
+                        <H5>Recipe Filters</H5>
                         <Filters post={recipe}></Filters>
                     </View>
                 </YStack>
