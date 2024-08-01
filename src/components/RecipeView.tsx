@@ -5,6 +5,7 @@ import { Bookmark } from '@tamagui/lucide-icons';
 import { arrayRemove, arrayUnion, DocumentSnapshot, QueryDocumentSnapshot, updateDoc } from 'firebase/firestore/lite';
 import { Button, H5, Paragraph, XStack, YStack, Image } from 'tamagui';
 import { Filters } from './Filters';
+import { Ingredients } from './Ingredients';
 import { useEffect, useState } from 'react';
 
 type Props = {
@@ -59,6 +60,7 @@ export function RecipeView(props: Props) {
           source={{ uri: String(recipe.data().imageUrl) }}
         />}
         <Paragraph>{recipe.data().caption}</Paragraph>
+        <Ingredients post={recipe}></Ingredients>
         <Filters post={recipe}></Filters>
         <XStack gap={20}>
           <Button
