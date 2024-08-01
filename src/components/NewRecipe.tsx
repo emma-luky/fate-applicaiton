@@ -1,6 +1,14 @@
+/*
+    Author: Alissa Shaw
+    Reviewd By: Emma Luk
+    Date: Summer 2024
+    Course:  Seeds
+
+    Description: Component to create new recipe post.
+*/
+
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Plus, X } from '@tamagui/lucide-icons';
 import { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
@@ -38,9 +46,12 @@ export function NewRecipe(props: Props) {
     const [captionValue, setCaptionValue] = useState('');
     const filters = [] as string[];
 
-    const handleCreateDifficultyPress = (difficulty: string) => {
-        filters.push(difficulty);
-        setCreateDifficulty(difficulty);
+    const handleCreateDifficultyPress = (difficulty: string | null) => {
+        if(difficulty){
+            filters.push(difficulty);
+            setCreateDifficulty(difficulty);
+        }
+        
       };
     
       const handleCreateCostPress = (cost: string) => {
@@ -221,7 +232,7 @@ export function NewRecipe(props: Props) {
           </View>
           <View style={styles.horizontal}>
               {ingredients.map((ingredient, index) => (
-                  <View key={index} style={styles.ingredientContainer}>
+                  <View key={index}>
                       <Text>{ingredient}</Text>
                       <TouchableOpacity onPress={() => removeIngredient(index)}>
                           <X />

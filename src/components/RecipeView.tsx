@@ -1,3 +1,12 @@
+/*
+    Author: Emma Luk
+    Reviewd By: Emma Luk
+    Date: Summer 2024
+    Course:  Seeds
+
+    Description: Component that displays a post.
+*/
+
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Alert, View } from 'react-native';
@@ -56,12 +65,12 @@ export function RecipeView(props: Props) {
       <View key={recipe.id}>
         <H5>{recipe.data()?.title}</H5>
         <Paragraph>{recipe.data()?.author}</Paragraph>
+        <Paragraph>{recipe.data()?.caption}</Paragraph>
         {recipe.data()?.imageUrl !== '#' && <Image
           width="100%"
           aspectRatio={1}
           source={{ uri: String(recipe.data()?.imageUrl) }}
         />}
-        <Paragraph>{recipe.data()?.caption}</Paragraph>
         <Ingredients post={recipe}></Ingredients>
         <Filters post={recipe}></Filters>
         <XStack gap={20}>

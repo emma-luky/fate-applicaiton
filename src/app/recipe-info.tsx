@@ -1,3 +1,12 @@
+/*
+    Author: Emma Luk
+    Reviewd By: Emma Luk
+    Date: Summer 2024
+    Course:  Seeds
+
+    Description: Displays the recipe instructions and info accordingto the post clicked.
+*/
+
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Alert, ScrollView, View } from 'react-native';

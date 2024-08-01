@@ -1,3 +1,12 @@
+/*
+    Author: Felisitas Purnomo
+    Reviewd By: Emma Luk
+    Date: Summer 2024
+    Course:  Seeds
+
+    Description: Allows existing users to sign in.
+*/
+
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useState } from 'react';
 import { Button } from 'react-native';

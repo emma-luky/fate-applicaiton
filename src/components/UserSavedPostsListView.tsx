@@ -1,16 +1,21 @@
+/*
+    Author: Emma Luk
+    Reviewd By: Emma Luk
+    Date: Summer 2024
+    Course:  Seeds
+
+    Description: Component that displays the saved list of posts by the logged in user.
+*/
+
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable no-unsafe-optional-chaining */
 import { useEffect, useState } from 'react';
 import {
-  collection,
   doc,
   DocumentSnapshot,
   getDoc,
-  getDocs,
-  query,
   QueryDocumentSnapshot,
-  where,
 } from 'firebase/firestore/lite';
 import { YStack } from 'tamagui';
 

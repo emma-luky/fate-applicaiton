@@ -1,4 +1,12 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/*
+    Author: Felisitas Purnomo
+    Reviewd By: Emma Luk
+    Date: Summer 2024
+    Course:  Seeds
+
+    Description: Allows new users to sign up and in.
+*/
+
 import { useState } from 'react';
 import { Alert, Button } from 'react-native';
 import { router } from 'expo-router';

@@ -1,3 +1,12 @@
+/*
+    Author: Emma Luk
+    Reviewd By: Emma Luk
+    Date: Summer 2024
+    Course:  Seeds
+
+    Description: Component that displays a post.
+*/
+
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Alert, View } from 'react-native';

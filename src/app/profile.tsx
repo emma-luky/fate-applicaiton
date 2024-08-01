@@ -1,20 +1,31 @@
-import { Stack } from 'expo-router';
-import { Avatar, H1, H5, ScrollView, SizableText, Tabs, YStack } from 'tamagui';
+/*
+    Author: Emma Luk
+    Reviewd By: Emma Luk
+    Date: Summer 2024
+    Course:  Seeds
+
+    Description: Displays users' info and posts they are authors of, as well as posts they have saved.
+*/
+
+import { router, Stack } from 'expo-router';
+import { Avatar, Button, H1, H5, ScrollView, SizableText, Tabs, XStack, YStack } from 'tamagui';
 import { NavBar } from '../components/NavBar';
 import { UserPostsListView } from '../components/UserPostsListView';
 import { UserSavedPostsListView } from '../components/UserSavedPostsListView';
 import { useEffect, useState } from 'react';
 import { doc, DocumentSnapshot, getDoc } from 'firebase/firestore/lite';
 import { db } from '../support/firebase';
-import { getAuth } from 'firebase/auth';
+import { getAuth, signOut } from 'firebase/auth';
+import { LogOut } from '@tamagui/lucide-icons';
+import { Alert } from 'react-native';
 
 export default function App() {
   const [user, setUser] = useState<DocumentSnapshot>();
+  const auth = getAuth();
 
   // for when the page loads
   useEffect(() => {
     const getUser = async () => {
-      const auth = getAuth();
       const currentUser = auth.currentUser;
 
       if (currentUser) {
@@ -37,10 +48,27 @@ export default function App() {
         }}
       />
       <ScrollView flex={5}>
-        <H1 alignSelf='center' marginBottom={15}>{user?.data()?.username}</H1>
-        <Avatar circular size='$6' alignSelf='center'>
-          <Avatar.Image src='http://picsum.photos/id/177/200/300'/>
-        </Avatar>
+        <XStack justifyContent='space-around' alignItems='center'>
+          <YStack alignItems='center'>
+            <H1 flex={1} margin={20}>{user?.data()?.username}</H1>
+            <H5 marginBottom={15}>{user?.data()?.school}</H5>
+          </YStack>
+          <Avatar circular size='$8' alignSelf='center'>
+            <Avatar.Image src='http://picsum.photos/id/177/200/300'/>
+          </Avatar>
+          <Button flex={0.1} onPress={() => {
+            signOut(auth).then(() => {
+              Alert.alert("Sign out unsuccessful");
+              router.replace('/');
+            }).catch(() => {
+              Alert.alert("Sign out unsuccessful");
+            });
+          }}>
+            <LogOut />
+          </Button>
+        </XStack>
+        
+        
         <Tabs defaultValue='Posts' marginTop={25}>
           <YStack flexDirection='column' alignItems='center'>
             <Tabs.List>
@@ -49,10 +77,6 @@ export default function App() {
               </Tabs.Tab>
               <Tabs.Tab value='Saved' width={195}>
                 <SizableText>Saved</SizableText>
-              </Tabs.Tab>
-
-              <Tabs.Tab value="New" width={125}>
-                <SizableText>New</SizableText>
               </Tabs.Tab>
             </Tabs.List>
 

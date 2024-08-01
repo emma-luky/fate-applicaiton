@@ -1,3 +1,12 @@
+/*
+    Author: Felisitas Purnomo
+    Reviewd By: Emma Luk
+    Date: Summer 2024
+    Course:  Seeds
+
+    Description: The welcoming page to DiShare application.
+*/
+
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -10,13 +19,13 @@ import tamaguiConfig from '../config/tamagui.config';
 const styles = StyleSheet.create({
   container: {
     padding: 50,
-    alignItems: 'center', // Centers items horizontally in the container
+    alignItems: 'center',
   },
   welcomeText: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 40,
-    textAlign: 'center', // Centers the text
+    textAlign: 'center',
   },
   image: {
     width: 100,
@@ -24,7 +33,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   button: {
-    backgroundColor: '#70CBCF', // Button color
+    backgroundColor: '#70CBCF',
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 5,
@@ -32,12 +41,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: {
-    color: '#FFFFFF', // Text color
+    color: '#FFFFFF',
     fontSize: 16,
     fontWeight: 'bold',
   },
   signUpContainer: {
-    alignItems: 'center', // Centers the Sign Up button horizontally
+    alignItems: 'center',
   },
 });
 

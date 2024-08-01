@@ -1,4 +1,12 @@
-import { Alert } from 'react-native';
+/*
+    Author: Emma Luk
+    Reviewd By: Emma Luk
+    Date: Summer 2024
+    Course:  Seeds
+
+    Description: Component that allows users to navigate to the different pages.
+*/
+
 import { Button, XStack, YStack } from 'tamagui'
 import { School, CircleUserRound, CookingPot } from '@tamagui/lucide-icons';
 import { router } from 'expo-router';

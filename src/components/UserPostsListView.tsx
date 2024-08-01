@@ -1,3 +1,12 @@
+/*
+    Author: Emma Luk
+    Reviewd By: Emma Luk
+    Date: Summer 2024
+    Course:  Seeds
+
+    Description: Component that displays the list of posts by the logged in user.
+*/
+
 import { useEffect, useState } from 'react';
 import {
   collection,
@@ -22,7 +31,6 @@ export function UserPostsListView(props: Props) {
   const [recipes, setRecipes] = useState<QueryDocumentSnapshot[]>([]);
   const user = props.user;
 
-  // for when the page loads
   useEffect(() => {
     const getPosts = async () => {
         const postsRef = collection(db, 'posts');
@@ -42,7 +50,7 @@ export function UserPostsListView(props: Props) {
   }, []);
   
   return (
-    <YStack gap={10} margin={10}>
+    <YStack l gap={10} margin={10}>
       {posts.map((post) => (
         <PostView key={post.id} post={post} user={user}/>
       ))}

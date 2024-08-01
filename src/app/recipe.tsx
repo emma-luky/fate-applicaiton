@@ -1,65 +1,69 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/*
+    Author: Alissa Shaw
+    Reviewd By: Emma Luk
+    Date: Summer 2024
+    Course:  Seeds
+
+    Description: Displays recipe posts from all users part of the application.
+*/
+
 import { router, Stack } from 'expo-router';
-import { ScrollView, View, Button, Input, Image, Text } from 'tamagui';
+import { ScrollView, View, Button, Input, Text } from 'tamagui';
 import { NavBar } from '../components/NavBar';
-import { StyleSheet, Modal, TextInput, TouchableOpacity, Alert } from 'react-native';
-import { useEffect, useState } from 'react';
-import { TamaguiProvider } from 'tamagui';
-import tamaguiConfig from '../config/tamagui.config';
-import { X, PlusSquare, Plus } from '@tamagui/lucide-icons';
-import * as imagePicker from 'expo-image-picker';
-import { addDoc, collection, QueryDocumentSnapshot } from 'firebase/firestore/lite';
-import { db } from '../support/firebase';
+import { Modal, TouchableOpacity } from 'react-native';
+import { useState } from 'react';
+import { X, PlusSquare } from '@tamagui/lucide-icons';
 import { RecipeListView } from '../components/RecipeListView';
 import { styles } from '../../assets/styles';
 
-// type Props = {
-//   recipe: QueryDocumentSnapshot;
-// };
-
-// export default function App() {
-  
-//   return (
-//     <>
-//       <TamaguiProvider config={tamaguiConfig}>
-//         <Stack.Screen options={{ title: 'Recipes' }} />
-//         <ScrollView flex={1}>
-//           <RecipeListView />
-//         </ScrollView>
-//         <NavBar />
-//       </TamaguiProvider>
-//     </>
-//   );
-// }
-
 
 export default function RecipePage() {
-  const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [isCreateVisible, setIsCreateVisible] = useState(false);
+  const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [filters, setFilters] = useState<string[]>([]); 
   const [inputValue, setInputValue] = useState('');
   const [filterDifficulty, setFilterDifficulty] = useState<string | null>(null);
   const [filterCost, setFilterCost] = useState('');
-  const [createCost, setCreateCost] = useState('');
   const handleFilterDifficultyPress = (difficulty: string) => {
-    setFilterDifficulty(difficulty);
+    if(filterDifficulty === difficulty){
+      setFilterDifficulty(null);
+      setFilters(filters.filter(filter => filter !== difficulty));
+    }else{
+      setFilterDifficulty(difficulty);
+      if (!filters.includes(difficulty)) {
+        setFilters([...filters, difficulty]);
+      }
+    }
   };
 
   const handleFilterCostPress = (cost: string) => {
-    setFilterCost(cost);
+    if (filterCost === cost) {
+      setFilterCost('');
+      setFilters(filters.filter(filter => filter !== cost));
+    } else {
+      setFilterCost(cost);
+      if (!filters.includes(cost)) {
+        setFilters([...filters, cost]);
+      }
+    }
   };
 
-  const addFilter = () => {
-    if (inputValue.trim() !== '') {
-      setFilters([...filters, inputValue.trim()]);
+  const addFilter = (filter) => {
+    if (filter.trim() !== '') {
+      setFilters([...filters, filter]);
       setInputValue('');
     }
   };
 
   const removeFilter = (index: number) => {
-    setFilters(filters.filter((_, i) => i !== index));
+    const removedFilter = filters[index];
+    setFilters((prevFilters) => {
+      const newFilters = prevFilters.filter((_, i) => i !== index);
+      return newFilters;
+    });
+    handleFilterCostPress(removedFilter);
+    handleFilterDifficultyPress(removedFilter);
   };
 
   const handleSaveFilters = () => {
@@ -77,15 +81,15 @@ export default function RecipePage() {
     if (combinedFilters.length > 0) {
       setFilters([...filters, ...combinedFilters]);
     }
-    // Close the filter modal
+    // Closes the filter modal
     setIsFilterVisible(false);
   };
 
   const handleCloseFilters = () => {
-    setFilters([]); // Clear the filters array
-    setCreateCost(''); // Reset selectedCost to null
-    setFilterDifficulty(null); // Reset selectedDifficulty to null
-    setIsFilterVisible(false); // Close the filter modal
+    setFilters([]);
+    setFilterDifficulty(null);
+     // Closes the filter modal
+    setIsFilterVisible(false);
   };
 
   return (
@@ -116,7 +120,7 @@ export default function RecipePage() {
 
       <ScrollView flex={1}>
         <View style={styles.horizontal}>
-          <RecipeListView/>
+          <RecipeListView filters={filters}/>
         </View> 
       </ScrollView>
       <NavBar />
@@ -126,6 +130,7 @@ export default function RecipePage() {
           <View style={styles.modalContent}>
             <View flex={0.5} />
               <View style={styles.vertical}>
+
                 <View id='difficulty' style={styles.horizontal}>
                   {['Easy', 'Medium', 'Hard'].map((difficulty) => (
                   <TouchableOpacity
@@ -134,7 +139,9 @@ export default function RecipePage() {
                       styles.button,
                       filterDifficulty === difficulty && styles.selectedButton,
                     ]}
-                    onPress={() => handleFilterDifficultyPress(difficulty)}
+                    onPress={() => {
+                      handleFilterDifficultyPress(difficulty);
+                    }}
                   >
                     <Text
                       style={[
@@ -156,7 +163,9 @@ export default function RecipePage() {
                       styles.button,
                       filterCost === cost && styles.selectedButton,
                     ]}
-                    onPress={() => handleFilterCostPress(cost)}
+                    onPress={() => {
+                      handleFilterCostPress(cost);
+                    }}
                   >
                     <Text
                       style={[
@@ -179,10 +188,11 @@ export default function RecipePage() {
                     placeholder="Filter Ingredients"
                     value={inputValue}
                     onChangeText={setInputValue}
-                    onSubmitEditing={addFilter}
+                    onSubmitEditing={() => addFilter(inputValue)}
                     placeholderTextColor='gray'
                   />
                 </View>
+
                 <View id='filters' style={styles.horizontal}>
                   {filters.map((filter, index) => (
                       <View key={index}>
@@ -193,15 +203,16 @@ export default function RecipePage() {
                       </View>
                   ))}
                 </View>
+
                 <View style={styles.horizontal}>
                   <Button onPress={() => handleCloseFilters()} flex={1} borderRadius={20} height={50} margin={10} chromeless>
                     <Text style={{ fontSize: 20 }}>Close</Text>
                   </Button>
-
                   <Button onPress={() => handleSaveFilters()} flex={1} borderRadius={20} height={50} margin={10} chromeless>
                     <Text style={{ fontSize: 20 }}>Save</Text>
                   </Button> 
                 </View>
+
               </View>
             </View>
       </Modal>

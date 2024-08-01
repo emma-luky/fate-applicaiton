@@ -1,3 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+/*
+    Author: Emma Luk
+    Reviewd By: Emma Luk
+    Date: Summer 2024
+    Course:  Seeds
+
+    Description: Component that has a dropdown menu of partnered schools.
+*/
+
 import { Check, ChevronDown, ChevronUp } from '@tamagui/lucide-icons';
 import { useMemo, useState } from 'react';
 import type { FontSizeTokens, SelectProps } from 'tamagui';

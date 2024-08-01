@@ -1,3 +1,12 @@
+/*
+    Author: Emma Luk
+    Reviewd By: Emma Luk
+    Date: Summer 2024
+    Course:  Seeds
+
+    Description: The page containing a form to create a new recipe.
+*/
+
 import { Stack } from 'expo-router';
 import { ScrollView } from 'tamagui';
 import { NavBar } from '../components/NavBar';
