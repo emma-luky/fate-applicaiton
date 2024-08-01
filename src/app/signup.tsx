@@ -9,7 +9,7 @@
 
 import { useState } from 'react';
 import { Alert, Button } from 'react-native';
-import { router } from 'expo-router';
+import { router, Stack } from 'expo-router';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore/lite';
 import { Input, TamaguiProvider, Text } from 'tamagui';
@@ -58,6 +58,7 @@ export default function App() {
   return (
     <>
       <TamaguiProvider config={tamaguiConfig}>
+      <Stack.Screen options={{ title: 'Sign Up' }} />
         <Text> Username </Text>
         <Input
           onChangeText={(username) =>

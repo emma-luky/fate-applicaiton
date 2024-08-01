@@ -10,7 +10,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useState } from 'react';
 import { Button } from 'react-native';
-import { router } from 'expo-router';
+import { router, Stack } from 'expo-router';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { TamaguiProvider, Text, Input } from 'tamagui';
 import tamaguiConfig from '../config/tamagui.config';
@@ -36,6 +36,7 @@ export default function App() {
 
   return (
     <TamaguiProvider config={tamaguiConfig}>
+      <Stack.Screen options={{ title: 'Sign In' }} />
       <Text> Email </Text>
       <Input
         onChangeText={(text) => setValues({ ...values, email: text })}
