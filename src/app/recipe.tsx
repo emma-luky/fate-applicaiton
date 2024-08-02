@@ -104,7 +104,7 @@ export default function RecipePage() {
             <Text>Filter</Text>
           </Button>
           <Input placeholder="Search" flex={2} onPressOut={() => {}} />
-          <Button flex={1} onPress={() => {router.navigate("/new-recipe"); setIsCreateVisible(true);}} chromeless>
+          <Button flex={1} onPress={() => {router.replace("/new-recipe"); setIsCreateVisible(true);}} chromeless>
             <PlusSquare size={32} />
           </Button>
         </View>
