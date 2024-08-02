@@ -4,7 +4,7 @@
     Date: Summer 2024
     Course:  Seeds
 
-    Description: Component to create new recipe post.
+    Description: Component to create new post.
 */
 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */

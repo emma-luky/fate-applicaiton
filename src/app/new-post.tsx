@@ -4,7 +4,7 @@
     Date: Summer 2024
     Course:  Seeds
 
-    Description: The page containing a form to create a new recipe.
+    Description: The page containing a form to create a new post.
 */
 
 import { Stack } from 'expo-router';
