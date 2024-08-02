@@ -36,7 +36,7 @@ type Props = {
 export function NewRecipe(props: Props) {
     const user = props.user;
     const [isCreateVisible, setIsCreateVisible] = useState(false);
-    const [createDifficulty, setCreateDifficulty] = useState<string | null>(null);
+    const [createDifficulty, setCreateDifficulty] = useState('');
     const [createCost, setCreateCost] = useState('');
     const [ingredients, setIngredients] = useState<string[]>([]);
     const [postImage, setImage] = useState<string>();

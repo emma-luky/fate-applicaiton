@@ -114,9 +114,9 @@ export default function App() {
                         <H5>Recipe</H5>
                         <Paragraph>{recipe?.data()?.recipe}</Paragraph>
                         <H5>Ingredients</H5>
-                        <Ingredients post={recipe}></Ingredients>
+                        <Ingredients post={recipe?.data()?.ingredients}></Ingredients>
                         <H5>Recipe Filters</H5>
-                        <Filters post={recipe}></Filters>
+                        <Filters post={recipe?.data()?.filter}></Filters>
                     </View>
                 </YStack>
             </ScrollView>
