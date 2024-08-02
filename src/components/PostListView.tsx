@@ -1,12 +1,3 @@
-/*
-    Author: Emma Luk
-    Reviewd By: Emma Luk
-    Date: Summer 2024
-    Course:  Seeds
-
-    Description: Component that displays the list of posts.
-*/
-
 import { useEffect, useState } from 'react';
 import {
   collection,

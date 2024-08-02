@@ -142,125 +142,122 @@ export function NewRecipe(props: Props) {
         } catch (e) {
             console.error("Error adding document: ", e);
         }
-        router.dismiss();
+        router.replace('/recipe');
       };
 
   return (
-        <><View
-          style={styles.vertical}
-          margin={30}
-          marginTop={80}>
-          <Input id="recipe title"
-              style={styles.input}
-              placeholder="Recipe Title"
-              value={newRecipeTitle}
-              onChangeText={setRecipeTitle}
-              placeholderTextColor='grey' />
+        <>
+            <View style={styles.vertical}
+                margin={30}
+                marginTop={80}>
+                <Input id="recipe title"
+                    style={styles.input}
+                    placeholder="Recipe Title"
+                    value={newRecipeTitle}
+                    onChangeText={setRecipeTitle}
+                    placeholderTextColor='grey' />
 
-          <Input id="caption"
-              style={styles.input}
-              placeholder="Caption"
-              value={captionValue}
-              onChangeText={setCaptionValue}
-              placeholderTextColor="grey"
-              multiline={true} />
+                <Input id="caption"
+                    style={styles.input}
+                    placeholder="Caption"
+                    value={captionValue}
+                    onChangeText={setCaptionValue}
+                    placeholderTextColor="grey"
+                    multiline={true} />
 
-          <Input id="description"
-              style={styles.input}
-              placeholder="Description"
-              value={descriptionValue}
-              onChangeText={setDescriptionValue}
-              placeholderTextColor="grey"
-              multiline={true}
-              numberOfLines={4} />
+                <Input id="description"
+                    style={styles.input}
+                    placeholder="Description"
+                    value={descriptionValue}
+                    onChangeText={setDescriptionValue}
+                    placeholderTextColor="grey"
+                    multiline={true}
+                    numberOfLines={4} />
 
-          <View id='difficulty' style={styles.horizontal}>
-              {['Easy', 'Medium', 'Hard'].map((difficulty) => (
-                  <TouchableOpacity
-                      key={difficulty}
-                      style={[
-                          styles.button,
-                          createDifficulty === difficulty && styles.selectedButton,
-                      ]}
-                      onPress={() => handleCreateDifficultyPress(difficulty)}
-                  >
-                      <Text
-                          style={[
-                              styles.buttonText,
-                              createDifficulty === difficulty && styles.selectedButtonText,
-                          ]}
-                      >
-                          {difficulty}
-                      </Text>
-                  </TouchableOpacity>
-              ))}
-          </View>
-          <View id='cost' style={styles.horizontal}>
-              {['$', '$$', '$$$'].map((cost) => (
-                  <TouchableOpacity
-                      key={cost}
-                      style={[
-                          styles.button,
-                          createCost === cost && styles.selectedButton,
-                      ]}
-                      onPress={() => handleCreateCostPress(cost)}
-                  >
-                      <Text
-                          style={[
-                              styles.costButtonText,
-                              createCost === cost && styles.selectedCostButtonText,
-                          ]}
-                      >
-                          {cost}
-                      </Text>
-                  </TouchableOpacity>
-              ))}
-          </View>
-          <View id="ingredients" style={styles.horizontal}>
-              <TouchableOpacity style={styles.left} onPress={addIngredient}>
-                  <View style={styles.horizontal}>
-                      <Text width={120} style={styles.addButton}>Add Ingredient</Text>
-                      <Plus style={styles.addButton} />
-                  </View>
-              </TouchableOpacity>
-              <Input
-                  marginLeft={20}
-                  width="60%"
-                  style={styles.input}
-                  value={ingredientInputValue}
-                  onChangeText={setIngredientInputValue} />
-          </View>
-          <View style={styles.horizontal}>
-              {ingredients.map((ingredient, index) => (
-                  <View key={index}>
-                      <Text>{ingredient}</Text>
-                      <TouchableOpacity onPress={() => removeIngredient(index)}>
-                          <X />
-                      </TouchableOpacity>
-                  </View>
-              ))}
-            </View>
-            <View id="images">
-                <TouchableOpacity style={styles.left} onPress={handleImagePicker}>
-                <View style={styles.horizontal}>
-                    <Text width={120} style={styles.addButton}>Choose Image</Text>
-                    <Plus style={styles.addButton} />
+                <View id='difficulty' style={styles.horizontal}>
+                {['Easy', 'Medium', 'Hard'].map((difficulty) => (
+                    <TouchableOpacity
+                        key={difficulty}
+                        style={[
+                            styles.button,
+                            createDifficulty === difficulty && styles.selectedButton,
+                        ]}
+                        onPress={() => handleCreateDifficultyPress(difficulty)}
+                    >
+                        <Text
+                            style={[
+                                styles.buttonText,
+                                createDifficulty === difficulty && styles.selectedButtonText,
+                            ]}
+                        >
+                            {difficulty}
+                        </Text>
+                    </TouchableOpacity>
+                ))}
                 </View>
+                <View id='cost' style={styles.horizontal}>
+                {['$', '$$', '$$$'].map((cost) => (
+                    <TouchableOpacity
+                        key={cost}
+                        style={[
+                            styles.button,
+                            createCost === cost && styles.selectedButton,
+                        ]}
+                        onPress={() => handleCreateCostPress(cost)}
+                    >
+                        <Text
+                            style={[
+                                styles.costButtonText,
+                                createCost === cost && styles.selectedCostButtonText,
+                            ]}
+                        >
+                            {cost}
+                        </Text>
+                    </TouchableOpacity>
+                ))}
+                </View>
+                <View id="ingredients" style={styles.horizontal}>
+                <TouchableOpacity style={styles.left} onPress={addIngredient}>
+                    <View style={styles.horizontal}>
+                        <Text width={120} style={styles.addButton}>Add Ingredient</Text>
+                        <Plus style={styles.addButton} />
+                    </View>
                 </TouchableOpacity>
-                <View style={styles.imagesWrapper}>
-                    {/* {postImages.map((image, index) => ( */}
-                    <View style={styles.imageContainer}>
-                            <Image source={{ uri: postImage ? postImage : '#' }} style={styles.image} />
-                            <TouchableOpacity onPress={() => removeImage()}>
-                                <X />
-                            </TouchableOpacity>
-                        </View>
-                        {/* ))} */}
+                <Input
+                    marginLeft={20}
+                    width="60%"
+                    style={styles.input}
+                    value={ingredientInputValue}
+                    onChangeText={setIngredientInputValue} />
+                </View>
+                <View style={styles.horizontal}>
+                {ingredients.map((ingredient, index) => (
+                    <View key={index}>
+                        <Text>{ingredient}</Text>
+                        <TouchableOpacity onPress={() => removeIngredient(index)}>
+                            <X />
+                        </TouchableOpacity>
+                    </View>
+                ))}
+                </View>
+                <View id="images">
+                    <TouchableOpacity style={styles.left} onPress={handleImagePicker}>
+                    <View style={styles.horizontal}>
+                        <Text width={120} style={styles.addButton}>Choose Image</Text>
+                        <Plus style={styles.addButton} />
+                    </View>
+                    </TouchableOpacity>
+                    <View style={styles.imagesWrapper}>
+                            <View style={styles.imageContainer}>
+                                <Image source={{ uri: postImage ? postImage : '#' }} style={styles.image} />
+                                <TouchableOpacity onPress={() => removeImage()}>
+                                </TouchableOpacity>
+                            </View>
                     </View>
                 </View>
             </View>
             <View flex={1} style={styles.horizontal}>
-                <TouchableOpacity style={styles.postButton} onPress={() => setIsCreateVisible(false)}>
+                <TouchableOpacity style={styles.postButton} onPress={() => router.replace('/recipe')}>
                     <Text style={styles.closeButton}>Close</Text>
                 </TouchableOpacity>
 
