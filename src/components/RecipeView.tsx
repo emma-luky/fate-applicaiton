@@ -78,7 +78,6 @@ export function RecipeView(props: Props) {
             p={0}
             chromeless
             onPress={() => {
-              Alert.alert('saved');
               void handleSavePost();
             }}
           >
