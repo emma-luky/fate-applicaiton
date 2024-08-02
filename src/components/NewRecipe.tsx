@@ -36,7 +36,7 @@ type Props = {
 export function NewRecipe(props: Props) {
     const user = props.user;
     const [isCreateVisible, setIsCreateVisible] = useState(false);
-    const [createDifficulty, setCreateDifficulty] = useState<string | null>(null);
+    const [createDifficulty, setCreateDifficulty] = useState('');
     const [createCost, setCreateCost] = useState('');
     const [ingredients, setIngredients] = useState<string[]>([]);
     const [postImage, setImage] = useState<string>();
@@ -260,7 +260,7 @@ export function NewRecipe(props: Props) {
                 </View>
             </View>
             <View flex={1} style={styles.horizontal}>
-                <TouchableOpacity style={styles.postButton} onPress={() => setIsCreateVisible(false)}>
+                <TouchableOpacity style={styles.postButton} onPress={() =>router.dismiss()}>
                     <Text style={styles.closeButton}>Close</Text>
                 </TouchableOpacity>
 

@@ -17,78 +17,80 @@ import { X, PlusSquare } from '@tamagui/lucide-icons';
 import { RecipeListView } from '../components/RecipeListView';
 import { styles } from '../../assets/styles';
 
-
 export default function RecipePage() {
+  const [filters, setFilters] = useState<string[]>([]);
+  const [unsavedFilters, setUnsavedFilters] = useState<string[]>([]);
   const [isCreateVisible, setIsCreateVisible] = useState(false);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
-  const [filters, setFilters] = useState<string[]>([]); 
   const [inputValue, setInputValue] = useState('');
   const [filterDifficulty, setFilterDifficulty] = useState<string | null>(null);
   const [filterCost, setFilterCost] = useState('');
+
   const handleFilterDifficultyPress = (difficulty: string) => {
-    if(filterDifficulty === difficulty){
-      setFilterDifficulty(null);
-      setFilters(filters.filter(filter => filter !== difficulty));
-    }else{
-      setFilterDifficulty(difficulty);
-      if (!filters.includes(difficulty)) {
-        setFilters([...filters, difficulty]);
-      }
-    }
+    setFilterDifficulty(prev => {
+      const newDifficulty = prev === difficulty ? null : difficulty;
+      setFilters((prevFilters) => {
+        const newFilters = prevFilters.filter(filter => filter !== difficulty);
+        if (newDifficulty) newFilters.push(newDifficulty);
+        return newFilters;
+      });
+      return newDifficulty;
+    });
   };
 
   const handleFilterCostPress = (cost: string) => {
-    if (filterCost === cost) {
-      setFilterCost('');
-      setFilters(filters.filter(filter => filter !== cost));
-    } else {
-      setFilterCost(cost);
-      if (!filters.includes(cost)) {
-        setFilters([...filters, cost]);
-      }
-    }
+    setFilterCost(prev => {
+      const newCost = prev === cost ? '' : cost;
+      setFilters((prevFilters) => {
+        const newFilters = prevFilters.filter(filter => filter !== cost);
+        if (newCost) newFilters.push(newCost);
+        return newFilters;
+      });
+      return newCost;
+    });
   };
 
-  const addFilter = (filter) => {
+  const addFilter = (filter: string) => {
     if (filter.trim() !== '') {
-      setFilters([...filters, filter]);
+      setUnsavedFilters(prev => [...prev, filter]);
       setInputValue('');
     }
   };
 
+  const saveFilters = () => {
+    setFilters(prevFilters => [
+      ...prevFilters,
+      ...unsavedFilters.filter(filter => !prevFilters.includes(filter))
+    ]);
+    setUnsavedFilters([]); // Clear unsavedFilters after saving
+    setInputValue('');
+  };
+
   const removeFilter = (index: number) => {
-    const removedFilter = filters[index];
-    setFilters((prevFilters) => {
+    setFilters(prevFilters => {
       const newFilters = prevFilters.filter((_, i) => i !== index);
       return newFilters;
     });
-    handleFilterCostPress(removedFilter);
-    handleFilterDifficultyPress(removedFilter);
   };
 
   const handleSaveFilters = () => {
-    const combinedFilters = [];
-    // Add selected cost to filters
-    if (filterCost && !filters.includes(filterCost)) {
+    const combinedFilters = [...filters];
+    if (filterCost && !combinedFilters.includes(filterCost)) {
       combinedFilters.push(filterCost);
     }
-    // Add selected difficulty to filters
-    if (filterDifficulty && !filters.includes(filterDifficulty)) {
+    if (filterDifficulty && !combinedFilters.includes(filterDifficulty)) {
       combinedFilters.push(filterDifficulty);
     }
-  
-    // Update filters state
-    if (combinedFilters.length > 0) {
-      setFilters([...filters, ...combinedFilters]);
-    }
-    // Closes the filter modal
+
+    setFilters(combinedFilters);
+    saveFilters();
     setIsFilterVisible(false);
   };
 
   const handleCloseFilters = () => {
     setFilters([]);
     setFilterDifficulty(null);
-     // Closes the filter modal
+    setFilterCost('');
     setIsFilterVisible(false);
   };
 
@@ -130,7 +132,6 @@ export default function RecipePage() {
           <View style={styles.modalContent}>
             <View flex={0.5} />
               <View style={styles.vertical}>
-
                 <View id='difficulty' style={styles.horizontal}>
                   {['Easy', 'Medium', 'Hard'].map((difficulty) => (
                   <TouchableOpacity
@@ -139,9 +140,7 @@ export default function RecipePage() {
                       styles.button,
                       filterDifficulty === difficulty && styles.selectedButton,
                     ]}
-                    onPress={() => {
-                      handleFilterDifficultyPress(difficulty);
-                    }}
+                    onPress={() => handleFilterDifficultyPress(difficulty)}
                   >
                     <Text
                       style={[
@@ -163,9 +162,7 @@ export default function RecipePage() {
                       styles.button,
                       filterCost === cost && styles.selectedButton,
                     ]}
-                    onPress={() => {
-                      handleFilterCostPress(cost);
-                    }}
+                    onPress={() => handleFilterCostPress(cost)}
                   >
                     <Text
                       style={[
@@ -179,8 +176,7 @@ export default function RecipePage() {
                   ))}
                 </View>
 
-                <View id='ingredients' 
-                  style={styles.vertical}>
+                <View id='ingredients' style={styles.vertical}>
                   <Input
                     marginLeft='40'
                     width='80%'
@@ -205,14 +201,13 @@ export default function RecipePage() {
                 </View>
 
                 <View style={styles.horizontal}>
-                  <Button onPress={() => handleCloseFilters()} flex={1} borderRadius={20} height={50} margin={10} chromeless>
+                  <Button onPress={handleCloseFilters} flex={1} borderRadius={20} height={50} margin={10} chromeless>
                     <Text style={{ fontSize: 20 }}>Close</Text>
                   </Button>
-                  <Button onPress={() => handleSaveFilters()} flex={1} borderRadius={20} height={50} margin={10} chromeless>
+                  <Button onPress={handleSaveFilters} flex={1} borderRadius={20} height={50} margin={10} chromeless>
                     <Text style={{ fontSize: 20 }}>Save</Text>
                   </Button> 
                 </View>
-
               </View>
             </View>
       </Modal>
