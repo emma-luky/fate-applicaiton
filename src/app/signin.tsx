@@ -7,9 +7,8 @@
     Description: Allows existing users to sign in.
 */
 
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useState } from 'react';
-import { Button } from 'react-native';
+import { Button, Alert } from 'react-native';
 import { router, Stack } from 'expo-router';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { TamaguiProvider, Text, Input } from 'tamagui';
@@ -27,10 +26,11 @@ export default function App() {
       );
       router.replace('/post');
     } catch(error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.error(errorCode);
-      console.error(errorMessage);
+      // const errorCode = error.code;
+      // const errorMessage = error.message;
+      // console.error(errorCode);
+      // console.error(errorMessage);
+      Alert.alert("username or password is invalid");
     }
   };
 
