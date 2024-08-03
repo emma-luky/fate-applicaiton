@@ -1,10 +1,10 @@
 /*
-    Author: Felisitas Purnomo
-    Reviewd By: Emma Luk
+    Author: Felisitas Michella Purnomo
+    Reviewed By: Emma Luk
     Date: Summer 2024
     Course:  Seeds
 
-    Description: The welcoming page to DiShare application.
+    Description: The welcoming page to the DiShare application.
 */
 
 /* eslint-disable react/no-unescaped-entities */
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
 
 
 /**
- * Welcome page, asks users to sign in or sign up
+ * The Welcome page, asks users to sign in or sign up
  */
 export default function App() {
   return (
