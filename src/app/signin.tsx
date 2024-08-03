@@ -1,6 +1,6 @@
 /*
-    Author: Felisitas Purnomo
-    Reviewd By: Emma Luk
+    Author: Felisitas Michella Purnomo
+    Reviewed By: Emma Luk
     Date: Summer 2024
     Course:  Seeds
 
@@ -16,7 +16,7 @@ import tamaguiConfig from '../config/tamagui.config';
 
 /**
  * Renders a form for a user to sign in
- * @returns user sign in
+ * @returns user sign-in
  */
 export default function App() {
   const [values, setValues] = useState({ email: '', password: '' });
