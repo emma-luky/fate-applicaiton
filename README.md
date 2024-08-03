@@ -1,5 +1,5 @@
 # FATE Application
-This application sprouted from the Dandilyonn SEEDS program
+This application sprouted from the Dandilyonn SEEDS program.
 ## Purpose
 Counteract the food instability that college students feel on and off campus.
 ## System Features
