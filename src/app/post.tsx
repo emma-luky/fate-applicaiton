@@ -1,10 +1,10 @@
 /*
     Author: Emma Luk
-    Reviewd By: Emma Luk
+    Reviewed By: Emma Luk
     Date: Summer 2024
     Course:  Seeds
 
-    Description: Displays campus posts from all users part of the application.
+    Description: Displays campus posts from all users as part of the application.
 */
 
 import { router, Stack } from 'expo-router';
@@ -16,7 +16,7 @@ import { styles } from '@/assets/styles';
 import { PlusSquare } from '@tamagui/lucide-icons';
 
 /**
- * Teh home page, this contains the campus related posts
+ * The home page, contains the campus-related posts
  * @returns list of posts
  */
 export default function App() {
