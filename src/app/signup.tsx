@@ -1,10 +1,10 @@
 /*
-    Author: Felisitas Purnomo
-    Reviewd By: Emma Luk
+    Author: Felisitas Michella Purnomo
+    Reviewed By: Emma Luk
     Date: Summer 2024
     Course:  Seeds
 
-    Description: Allows new users to sign up and in.
+    Description: Allows new users to sign up and sign in.
 */
 
 import { useState } from 'react';
@@ -19,7 +19,7 @@ import tamaguiConfig from '../config/tamagui.config';
 import { db } from '../support/firebase';
 
 /**
- * Renders a form for a user to sign up that has a the values that a user object needs
+ * Renders a form for a user to sign up that has the values that a user object needs
  * @returns new user form to sign up
  */
 export default function App() {
@@ -32,7 +32,7 @@ export default function App() {
     school: '',
   });
 
-  // once submitted creates a new user in auth and in the users collection
+  //Once submitted create a new user in auth and in the users' collection
   const onSubmit = async () => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
