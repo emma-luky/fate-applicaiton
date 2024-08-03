@@ -1,3 +1,12 @@
+/**
+ *  Author: Alissa Shaw
+    Reviewd By: Emma Luk
+    Date: Summer 2024
+    Course:  Seeds
+
+ * Style component for UI
+ * 
+ */
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({

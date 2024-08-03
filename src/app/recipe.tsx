@@ -5,6 +5,7 @@
     Course:  Seeds
 
     Description: Displays recipe posts from all users part of the application.
+    Allows user to filter through posts based on cost and difficulty.
 */
 
 import { router, Stack } from 'expo-router';
@@ -17,14 +18,25 @@ import { RecipeListView } from '../components/RecipeListView';
 import { styles } from '../../assets/styles';
 
 export default function RecipePage() {
+  //To display filters
   const [filters, setFilters] = useState<string[]>([]);
+  //To hold filters until saved
   const [unsavedFilters, setUnsavedFilters] = useState<string[]>([]);
+  //To set the create modals visiblity
   const [isCreateVisible, setIsCreateVisible] = useState(false);
+  //To set the filter modals visiblity
   const [isFilterVisible, setIsFilterVisible] = useState(false);
+  //Sets value for filter
   const [inputValue, setInputValue] = useState('');
+  //Sets value for level of difficulty
   const [filterDifficulty, setFilterDifficulty] = useState<string | null>(null);
+  //Sets value for level of cost
   const [filterCost, setFilterCost] = useState('');
 
+  /**
+   * Saves difficulty button chosen by user and displays button as blue
+   * @param difficulty 
+   */
   const handleFilterDifficultyPress = (difficulty: string) => {
     setFilterDifficulty(prev => {
       const newDifficulty = prev === difficulty ? null : difficulty;
@@ -37,6 +49,11 @@ export default function RecipePage() {
     });
   };
 
+  /**
+   * Pushes the cost button pressed in the filter modal to change the color blue
+   * and display the filter
+   * @param cost 
+   */
   const handleFilterCostPress = (cost: string) => {
     setFilterCost(prev => {
       const newCost = prev === cost ? '' : cost;
@@ -49,6 +66,10 @@ export default function RecipePage() {
     });
   };
 
+  /**
+   * Adds specified filter to an unposted array
+   * @param filter 
+   */
   const addFilter = (filter: string) => {
     if (filter.trim() !== '') {
       setUnsavedFilters(prev => [...prev, filter]);
@@ -56,6 +77,10 @@ export default function RecipePage() {
     }
   };
 
+  /**
+   * Adds unsaved filters to filters once 'saved' button is pressed,
+   * displays filters
+   */
   const saveFilters = () => {
     setFilters(prevFilters => [
       ...prevFilters,
@@ -65,6 +90,10 @@ export default function RecipePage() {
     setInputValue('');
   };
 
+  /**
+   * clears all filters out of map
+   * @param index 
+   */
   const removeFilter = (index: number) => {
     setFilters(prevFilters => {
       const newFilters = prevFilters.filter((_, i) => i !== index);
@@ -72,6 +101,10 @@ export default function RecipePage() {
     });
   };
 
+  /**
+   * Saves all filters from modal;
+   * filters, price, and difficulty
+   */
   const handleSaveFilters = () => {
     const combinedFilters = [...filters];
     if (filterCost && !combinedFilters.includes(filterCost)) {
@@ -80,12 +113,14 @@ export default function RecipePage() {
     if (filterDifficulty && !combinedFilters.includes(filterDifficulty)) {
       combinedFilters.push(filterDifficulty);
     }
-
     setFilters(combinedFilters);
     saveFilters();
     setIsFilterVisible(false);
   };
 
+  /**
+   * resets filters
+   */
   const handleCloseFilters = () => {
     setFilters([]);
     setFilterDifficulty(null);
