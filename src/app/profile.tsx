@@ -1,6 +1,6 @@
 /*
     Author: Emma Luk
-    Reviewd By: Emma Luk
+    Reviewed By: Emma Luk
     Date: Summer 2024
     Course:  Seeds
 
