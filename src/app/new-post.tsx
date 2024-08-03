@@ -1,10 +1,10 @@
 /*
     Author: Emma Luk
-    Reviewd By: Emma Luk
+    Reviewed By: Emma Luk
     Date: Summer 2024
     Course:  Seeds
 
-    Description: The page containing a form to create a new post.
+    Description: The page contains a form to create a new post.
 */
 
 import { Stack } from 'expo-router';
