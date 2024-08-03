@@ -19,14 +19,25 @@ import { RecipeListView } from '../components/RecipeListView';
 import { styles } from '../../assets/styles';
 
 export default function RecipePage() {
+  //To display filters
   const [filters, setFilters] = useState<string[]>([]);
+  //To hold filters until saved
   const [unsavedFilters, setUnsavedFilters] = useState<string[]>([]);
+  //To set the create modals visiblity
   const [isCreateVisible, setIsCreateVisible] = useState(false);
+  //To set the filter modals visiblity
   const [isFilterVisible, setIsFilterVisible] = useState(false);
+  //Sets value for filter
   const [inputValue, setInputValue] = useState('');
+  //Sets value for level of difficulty
   const [filterDifficulty, setFilterDifficulty] = useState<string | null>(null);
+  //Sets value for level of cost
   const [filterCost, setFilterCost] = useState('');
 
+  /**
+   * Saves difficulty button chosen by user and displays button as blue
+   * @param difficulty 
+   */
   const handleFilterDifficultyPress = (difficulty: string) => {
     setFilterDifficulty(prev => {
       const newDifficulty = prev === difficulty ? null : difficulty;
