@@ -1,10 +1,10 @@
 /*
     Author: Emma Luk
-    Reviewd By: Emma Luk
+    Reviewed By: Emma Luk
     Date: Summer 2024
     Course:  Seeds
 
-    Description: Displays the recipe instructions and info accordingto the post clicked.
+    Description: Displays the recipe instructions and info according to the post clicked.
 */
 
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -21,7 +21,7 @@ import { getAuth } from 'firebase/auth';
 import { db } from '../support/firebase';
 
 /**
- * Renders a page that shows a more depth description of a recipe
+ * Renders a page that shows a more in-depth description of a recipe
  * @returns recipe information
  */
 export default function App() {
