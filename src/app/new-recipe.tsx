@@ -1,10 +1,10 @@
 /*
     Author: Emma Luk
-    Reviewd By: Emma Luk
+    Reviewed By: Emma Luk
     Date: Summer 2024
     Course:  Seeds
 
-    Description: The page containing a form to create a new recipe.
+    Description: The page contains a form to create a new recipe.
 */
 
 import { Stack } from 'expo-router';
