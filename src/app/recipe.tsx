@@ -1,11 +1,11 @@
 /*
     Author: Alissa Shaw
-    Reviewd By: Emma Luk
+    Reviewed By: Emma Luk
     Date: Summer 2024
     Course:  Seeds
 
     Description: Displays recipe posts from all users part of the application.
-    Allows user to filter through posts based on cost and difficulty.
+    Allows users to filter through posts based on cost and difficulty.
 */
 
 import { router, Stack } from 'expo-router';
@@ -50,7 +50,7 @@ export default function RecipePage() {
   };
 
   /**
-   * Pushes the cost button pressed in the filter modal to change the color blue
+   * Pushes the cost button in the filter modal to change the color to blue
    * and display the filter
    * @param cost 
    */
@@ -67,7 +67,7 @@ export default function RecipePage() {
   };
 
   /**
-   * Adds specified filter to an unposted array
+   * Adds a specified filter to an unposted array
    * @param filter 
    */
   const addFilter = (filter: string) => {
@@ -78,7 +78,7 @@ export default function RecipePage() {
   };
 
   /**
-   * Adds unsaved filters to filters once 'saved' button is pressed,
+   * Adds unsaved filters to filters once the 'saved' button is pressed,
    * displays filters
    */
   const saveFilters = () => {
@@ -91,7 +91,7 @@ export default function RecipePage() {
   };
 
   /**
-   * clears all filters out of map
+   * clears all filters out of the map
    * @param index 
    */
   const removeFilter = (index: number) => {
