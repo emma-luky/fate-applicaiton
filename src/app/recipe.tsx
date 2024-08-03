@@ -6,6 +6,7 @@
     Course:  Seeds
 
     Description: Displays recipe posts from all users part of the application.
+    Allows user to filter through posts based on cost and difficulty.
 */
 
 import { router, Stack } from 'expo-router';
@@ -38,6 +39,11 @@ export default function RecipePage() {
     });
   };
 
+  /**
+   * Pushes the cost button pressed in the filter modal to change the color blue
+   * and display the filter
+   * @param cost 
+   */
   const handleFilterCostPress = (cost: string) => {
     setFilterCost(prev => {
       const newCost = prev === cost ? '' : cost;
@@ -50,6 +56,10 @@ export default function RecipePage() {
     });
   };
 
+  /**
+   * Adds specified filter to an unposted array
+   * @param filter 
+   */
   const addFilter = (filter: string) => {
     if (filter.trim() !== '') {
       setUnsavedFilters(prev => [...prev, filter]);
@@ -57,6 +67,10 @@ export default function RecipePage() {
     }
   };
 
+  /**
+   * Adds unsaved filters to filters once 'saved' button is pressed,
+   * displays filters
+   */
   const saveFilters = () => {
     setFilters(prevFilters => [
       ...prevFilters,
@@ -66,6 +80,10 @@ export default function RecipePage() {
     setInputValue('');
   };
 
+  /**
+   * clears all filters out of map
+   * @param index 
+   */
   const removeFilter = (index: number) => {
     setFilters(prevFilters => {
       const newFilters = prevFilters.filter((_, i) => i !== index);
@@ -73,6 +91,10 @@ export default function RecipePage() {
     });
   };
 
+  /**
+   * Saves all filters from modal;
+   * filters, price, and difficulty
+   */
   const handleSaveFilters = () => {
     const combinedFilters = [...filters];
     if (filterCost && !combinedFilters.includes(filterCost)) {
@@ -81,12 +103,14 @@ export default function RecipePage() {
     if (filterDifficulty && !combinedFilters.includes(filterDifficulty)) {
       combinedFilters.push(filterDifficulty);
     }
-
     setFilters(combinedFilters);
     saveFilters();
     setIsFilterVisible(false);
   };
 
+  /**
+   * resets filters
+   */
   const handleCloseFilters = () => {
     setFilters([]);
     setFilterDifficulty(null);
