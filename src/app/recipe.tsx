@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 /*
     Author: Alissa Shaw
     Reviewd By: Emma Luk

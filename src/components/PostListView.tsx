@@ -21,6 +21,10 @@ import { db } from '../support/firebase';
 import { PostView } from './PostView';
 import { getAuth } from 'firebase/auth';
 
+/**
+ * Renders the list of posts among all users
+ * @returns the list of recipes
+ */
 export function PostListView() {
   const [posts, setPosts] = useState<QueryDocumentSnapshot[]>([]);
   const [user, setUser] = useState<DocumentSnapshot>();

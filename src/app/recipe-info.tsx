@@ -20,7 +20,10 @@ import { useLocalSearchParams, Stack } from 'expo-router';
 import { getAuth } from 'firebase/auth';
 import { db } from '../support/firebase';
 
-
+/**
+ * Renders a page that shows a more depth description of a recipe
+ * @returns recipe information
+ */
 export default function App() {
     const { recipeId } = useLocalSearchParams<{ recipeId: string }>(); // Destructure the query object
     const [isSaved, setIsSaved] = useState(false);

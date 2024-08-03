@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /*
     Author: Emma Luk
     Reviewd By: Emma Luk
@@ -26,15 +27,22 @@ type Props = {
   user: DocumentSnapshot | undefined;
 };
 
+/**
+ * Renders the lists of posts written by the signed in user
+ * @param props - props object containing the user
+ * @returns the posts a recipes by the logged in user
+ */
 export function UserPostsListView(props: Props) {
   const [posts, setPosts] = useState<QueryDocumentSnapshot[]>([]);
   const [recipes, setRecipes] = useState<QueryDocumentSnapshot[]>([]);
   const user = props.user;
+  const username = user?.data()?.username;
 
   useEffect(() => {
-    const getPosts = async () => {
+    if(username){
+      const getPosts = async () => {
         const postsRef = collection(db, 'posts');
-        const q = query(postsRef, where('author', '==', 'john'));
+        const q = query(postsRef, where('author', '==', username));
         const postsSnapshot = await getDocs(q);
         setPosts(postsSnapshot.docs);
     };
@@ -42,12 +50,15 @@ export function UserPostsListView(props: Props) {
 
     const getRecipes = async () => {
         const recipesRef = collection(db, 'recipes');
-        const q = query(recipesRef, where('author', '==', 'john'));
+        const q = query(recipesRef, where('author', '==', username));
         const recipesSnapshot = await getDocs(q);
         setRecipes(recipesSnapshot.docs);
       };
       void getRecipes();
+    }
+
   }, []);
+
   
   return (
     <YStack l gap={10} margin={10}>

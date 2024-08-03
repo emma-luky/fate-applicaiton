@@ -17,6 +17,11 @@ type Props = {
   post: DocumentSnapshot | undefined;
 };
 
+/**
+ * Renders how the filters of a recipe show up on the post
+ * @param props - props object containing the post
+ * @returns the list of filters
+ */
 export function Filters(props: Props) {
     const post = props.post;
     const filters = post?.data()?.filters;

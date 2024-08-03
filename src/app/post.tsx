@@ -15,7 +15,10 @@ import { PostListView } from '../components/PostListView';
 import { styles } from '@/assets/styles';
 import { PlusSquare } from '@tamagui/lucide-icons';
 
-
+/**
+ * Teh home page, this contains the campus related posts
+ * @returns list of posts
+ */
 export default function App() {
   const [isCreateVisible, setIsCreateVisible] = useState(false);
   return (

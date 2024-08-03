@@ -14,6 +14,12 @@ import type { FontSizeTokens, SelectProps } from 'tamagui';
 import { Adapt, Select, Sheet, YStack, getFontSize } from 'tamagui';
 import { LinearGradient } from 'expo-linear-gradient'; // Correct import
 
+/**
+ * Drop down menu of available schools (goal is to partner with schools)
+ * CITE: @tamagui/select
+ * @param param0 - takes in a function that describes the functionality once an item is chosen
+ * @returns a dropdown showing the different options
+ */
 export function SchoolDropdown({ onSchoolSelect, ...props }: SelectProps & { onSchoolSelect: (school: string) => void }) {
   const [val, setVal] = useState('');
 

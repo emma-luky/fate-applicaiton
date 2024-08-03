@@ -16,10 +16,13 @@ import { getAuth } from 'firebase/auth';
 import { useState, useEffect } from 'react';
 import { db } from '../support/firebase';
 
+/**
+ * Renders a new page that contains the new recipe post form
+ * @returns new recipe form
+ */
 export default function App() {
   const [user, setUser] = useState<DocumentSnapshot>();
 
-  // for when the page loads
   useEffect(() => {
     const getUser = async () => {
       const auth = getAuth();

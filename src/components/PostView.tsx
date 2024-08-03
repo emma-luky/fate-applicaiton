@@ -21,6 +21,11 @@ type Props = {
   user: DocumentSnapshot | undefined;
 };
 
+/**
+ * The visulaization of a how a campus post looks like
+ * @param props - props object containing the user and post
+ * @returns a post
+ */
 export function PostView(props: Props) {
   const post = props.post;
   const user = props.user;
@@ -37,18 +42,20 @@ export function PostView(props: Props) {
 
   const handleSavePost = async () => {
     try {
-      if(isSaved){
-        await updateDoc(user.ref, {
-          savedPosts: arrayRemove(post.id),
-        });
-        setIsSaved(false);
-      }
-      else{
-        await updateDoc(user.ref, {
-          savedPosts: arrayUnion(post.id),
-        });
-        setIsSaved(true);
-        Alert.alert('Post saved!');
+      if(user){
+        if(isSaved){
+          await updateDoc(user.ref, {
+            savedPosts: arrayRemove(post.id),
+          });
+          setIsSaved(false);
+        }
+        else{
+          await updateDoc(user.ref, {
+            savedPosts: arrayUnion(post.id),
+          });
+          setIsSaved(true);
+          Alert.alert('Post saved!');
+        }
       }
     } catch (error) {
       console.error('Error saving post:', error);

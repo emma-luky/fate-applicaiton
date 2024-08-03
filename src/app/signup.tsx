@@ -18,6 +18,10 @@ import { SchoolDropdown } from '../components/SchoolDropdown';
 import tamaguiConfig from '../config/tamagui.config';
 import { db } from '../support/firebase';
 
+/**
+ * Renders a form for a user to sign up that has a the values that a user object needs
+ * @returns new user form to sign up
+ */
 export default function App() {
   const auth = getAuth();
   const [values, setValues] = useState({
@@ -28,6 +32,7 @@ export default function App() {
     school: '',
   });
 
+  // once submitted creates a new user in auth and in the users collection
   const onSubmit = async () => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -50,7 +55,7 @@ export default function App() {
       if (error.code === 'auth/email-already-in-use') {
         Alert.alert('Error', 'This email address is already in use.');
       } else {
-        console.error('Error signing up:', error);
+        Alert.alert('Error signing up');
       }
     }
   };

@@ -14,6 +14,10 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { TamaguiProvider, Text, Input } from 'tamagui';
 import tamaguiConfig from '../config/tamagui.config';
 
+/**
+ * Renders a form for a user to sign in
+ * @returns user sign in
+ */
 export default function App() {
   const [values, setValues] = useState({ email: '', password: '' });
   const auth = getAuth();

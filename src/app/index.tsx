@@ -50,6 +50,10 @@ const styles = StyleSheet.create({
   },
 });
 
+
+/**
+ * Welcome page, asks users to sign in or sign up
+ */
 export default function App() {
   return (
     <TamaguiProvider config={tamaguiConfig}>

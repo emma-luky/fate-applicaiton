@@ -19,11 +19,14 @@ import { getAuth, signOut } from 'firebase/auth';
 import { LogOut } from '@tamagui/lucide-icons';
 import { Alert } from 'react-native';
 
+/**
+ * Profile page for the user
+ * @returns REnders User's name, school, posts, and saved posts
+ */
 export default function App() {
   const [user, setUser] = useState<DocumentSnapshot>();
   const auth = getAuth();
 
-  // for when the page loads
   useEffect(() => {
     const getUser = async () => {
       const currentUser = auth.currentUser;
@@ -58,7 +61,7 @@ export default function App() {
           </Avatar>
           <Button flex={0.1} onPress={() => {
             signOut(auth).then(() => {
-              Alert.alert("Sign out unsuccessful");
+              Alert.alert("Sign out successful");
               router.replace('/');
             }).catch(() => {
               Alert.alert("Sign out unsuccessful");
@@ -81,10 +84,10 @@ export default function App() {
             </Tabs.List>
 
             <Tabs.Content value='Posts' alignSelf='flex-start'>
-              <UserPostsListView user={user}/>
+              {user && <UserPostsListView user={user} />}
             </Tabs.Content>
             <Tabs.Content value='Saved' alignSelf='flex-start'>
-              <UserSavedPostsListView user={user}/>
+              {user && <UserSavedPostsListView user={user} />}
             </Tabs.Content>
 
             <Tabs.Content value="New">

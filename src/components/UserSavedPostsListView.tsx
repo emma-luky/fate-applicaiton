@@ -27,6 +27,11 @@ type Props = {
   user: DocumentSnapshot | undefined;
 };
 
+/**
+ * Renders the lists of posts saved by the signed in user
+ * @param props - props object containing the user
+ * @returns user's saved posts
+ */
 export function UserSavedPostsListView(props: Props) {
     const user = props.user;
     const [posts, setPosts] = useState<QueryDocumentSnapshot[]>([]);

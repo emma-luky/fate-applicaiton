@@ -11,6 +11,10 @@ import { Button, XStack, YStack } from 'tamagui'
 import { School, CircleUserRound, CookingPot } from '@tamagui/lucide-icons';
 import { router } from 'expo-router';
 
+/**
+ * Renders the navigation bar that appears on the pottom of each page
+ * @returns the navigation bar
+ */
 export function NavBar() {
   return (
     <XStack

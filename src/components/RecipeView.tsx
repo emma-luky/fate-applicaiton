@@ -24,6 +24,11 @@ type Props = {
   user: DocumentSnapshot | undefined;
 };
 
+/**
+ * The visulaization of a how a recipe post looks like
+ * @param props - props object containing the user and recipe
+ * @returns a recipe post
+ */
 export function RecipeView(props: Props) {
   const recipe = props.recipe;
   const user = props.user;
@@ -40,20 +45,21 @@ export function RecipeView(props: Props) {
 
   const handleSavePost = async () => {
     try {
-      if(isSaved){
-        await updateDoc(user.ref, {
-          savedPosts: arrayRemove(recipe.id),
-        });
-        setIsSaved(false);
+      if (user){
+        if(isSaved){
+          await updateDoc(user.ref, {
+            savedPosts: arrayRemove(recipe.id),
+          });
+          setIsSaved(false);
+        }
+        else{
+          await updateDoc(user.ref, {
+            savedPosts: arrayUnion(recipe.id),
+          });
+          setIsSaved(true);
+          Alert.alert('Post saved!');
+        }
       }
-      else{
-        await updateDoc(user.ref, {
-          savedPosts: arrayUnion(recipe.id),
-        });
-        setIsSaved(true);
-        Alert.alert('Post saved!');
-      }
-      
     } catch (error) {
       console.error('Error saving post:', error);
       Alert.alert('Failed to save post.');

@@ -16,6 +16,10 @@ import { getAuth } from 'firebase/auth';
 import { useState, useEffect } from 'react';
 import { db } from '../support/firebase';
 
+/**
+ * Renders a new page that contains the new post form
+ * @returns new post form
+ */
 export default function App() {
   const [user, setUser] = useState<DocumentSnapshot>();
 

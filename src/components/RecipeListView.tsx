@@ -17,6 +17,11 @@ interface RecipeListViewProps {
   filters: string[];
 }
 
+/**
+ * Renders the list of recipes among all users
+ * @param param0 - takes in the different filters a user has selected 
+ * @returns the list of recipes
+ */
 export function RecipeListView({ filters }: RecipeListViewProps) {
   const [recipes, setRecipes] = useState<QueryDocumentSnapshot[]>([]);
   const [user, setUser] = useState<DocumentSnapshot | undefined>(undefined);
@@ -38,14 +43,12 @@ export function RecipeListView({ filters }: RecipeListViewProps) {
       const recipesRef = collection(db, 'recipes');
       const recipesSnapshot = await getDocs(recipesRef);
 
-      // Filter recipes based on filters
-      let filteredRecipes = [];
+      const filteredRecipes = [];
 
       for (const post of recipesSnapshot.docs) {
         const recipeData = post.data();
-        console.log('RecipeData:', post.data().filters);
+        // console.log('RecipeData:', post.data().filters);
 
-        // Check if the recipe's ingredients contain all filters
         const includesAllFilters = filters.every(filter => recipeData.filters?.includes(filter));
 
         if (includesAllFilters) {

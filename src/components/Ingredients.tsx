@@ -17,6 +17,11 @@ type Props = {
   post: DocumentSnapshot | undefined;
 };
 
+/**
+ * Renders how the ingredients of a recipe show up on the post
+ * @param props - props object containing the post
+ * @returns the list of ingredients
+ */
 export function Ingredients(props: Props) {
     const post = props.post;
     const ingredients = post?.data()?.ingredients;
