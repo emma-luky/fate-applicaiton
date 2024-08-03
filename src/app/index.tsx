@@ -15,7 +15,9 @@ import { TamaguiProvider } from 'tamagui';
 
 import icon from '../../assets/icon.png';
 import tamaguiConfig from '../config/tamagui.config';
-
+/*
+    Controlling the page styles, such as icon size, button colors, text colors
+*/
 const styles = StyleSheet.create({
   container: {
     padding: 50,
